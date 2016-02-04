@@ -14,7 +14,7 @@ class TweetPreprocessing():
     def remove_url_mention_hashtag(self):
         tweet_list = []
 
-        lines = open('test.txt', 'r').readlines()
+        lines = open(path_to_raw_tweet, 'r').readlines()
 
         for line in lines:
 
@@ -33,9 +33,14 @@ class TweetPreprocessing():
 
             t4 = re.sub(r"&amp;", "and", t3).strip()
 
-            tweet_list.append(t4)
+            # replace <3 with 'love'
+
+            t5 = re.sub(r"<3", "love", t4).strip()
+
+            tweet_list.append(t5)
 
         return tweet_list
+
 
     def expand_contraction(self):
 
@@ -60,6 +65,7 @@ class TweetPreprocessing():
             'didn\'t': 'did not',
             'didnt' : 'did not',
             'don\'t' : 'do not',
+            'don’t' : 'do not',
             'dont' : 'do not',
             'doesn\'t': 'does not',
             'doesnt': 'does not',
@@ -80,8 +86,6 @@ class TweetPreprocessing():
         list = self.remove_url_mention_hashtag()
         tweet_list = []
 
-
-
         contractions_re = re.compile('(%s)' % '|'.join(contractions_dict.keys()), re.IGNORECASE)
 
 
@@ -98,67 +102,179 @@ class TweetPreprocessing():
 
     def replace_emoticon(self):
 
+        ###################
+        # Create emoticon dictionary from tsv
+        ##################
+
+        emoticon_dict = {}
+
+        lines  = open(path_to_emoticon_dictionary, 'r').readlines()
+
+        for line in lines:
+
+            spline = line.replace('\n', '').split('\t')
+            emoticon_dict[spline[0]] = spline[1]
+
+
         ####################
-        # The regex list below is taken from Chris Pott's tokenizer script
+        # The emoticon regex list below is a modified version taken from Chris Pott's tokenizer script
         ####################
 
         # the smiley ':-\' is compiled as ':-\\'
 
-        emoticon_dict = {':)': 'happy', ':-(': 'disappointed', ':*': 'kiss'}
-
         emoticon_string = r"""
             (?:
               [<>]?
-              [:;=8^]                     # eyes
-              [\-o\*\'.]?                 # optional nose
-              [\)\]\(\[dDpP/\:\}\{@\|\\\*\>\<\0\O] # mouth
+              [:;=8^%xX]                     # eyes
+              [\-o\*\'\.\_]?                 # optional nose
+              [\)\]\(\[dDpP/\:\}\{@\|\\\*\>\<\0\O\^] # mouth
               |
-              [\)\]\(\[dDpP/\:\}\{@\|\\\*\>\<\0\O] # mouth
-              [\-o\*\'.]?                 # optional nose
-              [:;=8^]                     # eyes
+              [\)\]\(\[dDpP/\:\}\{@\|\\\*\>\<\0\O\^] # mouth
+              [\-o\*\'\.\_]?                 # optional nose
+              [:;=8^%xX]                     # eyes
               [<>]?
             )"""
 
         ######################
 
+
+
         list = self.expand_contraction()
 
         tweet_list = []
 
+        emoticon_re = re.compile(emoticon_string, re.VERBOSE | re.I | re.UNICODE)
 
         for l in list:
-
-            emoticon_re = re.compile(emoticon_string, re.VERBOSE | re.I | re.UNICODE)
 
             # re.findall() method returns all non-overlapping matches of pattern in string, as a list of strings.(e.g. [':)', ':-(']
             emoticon = emoticon_re.findall(l)
 
             # if no emoticons in tweet, append the tweet to tweet list unchanged
             if emoticon == []:
+                print ("no emoticon in this tweet")
                 tweet_list.append(l)
 
             else:
 
                 for e in emoticon:
 
-                    el = l.replace(e, emoticon_dict[e])
+                    key = e
 
-                    # the following line makes sure that if there are more than one emoticon in the tweet,
-                    # all emoticons are replaced
-                    l = el
+                    if key in emoticon_dict:
+
+                        print ("emoticon "+str(e)+" in dict")
+
+                        el = l.replace(e, emoticon_dict[e])
+
+                        # the following line makes sure that if there are more than one emoticon in the tweet,
+                        # all emoticons are replaced
+                        l = el
+
+                    else:
+                        print ("emoticon "+str(e)+" not in dict")
+                        el = l.replace(e,' ')
+                        l = el
 
                 tweet_list.append(el)
 
+        return tweet_list
+
+    def remove_punctuation(self):
+
+        #####################
+        # Need to remove punctuation because of slang lookup (and also ngram lookup)
+        # e.g. 'ur' is replaced with 'you are' in slang dict, but if tweet contains 'i am ur, so i come'
+        # 'ur,' wil be a word, and won't match the key in dict
+        # this step must only happen after replace_emoticons and expand_contractions!
+        #####################
+
+        # Replace punctuation with white space, not nil! So that words won't join together when punctuation is removed
+
+        tweet_list = []
+
+        list = self.replace_emoticon()
+
+        for l in list:
+
+            #remove special characters
+            tweet = re.sub("[^A-Za-z0-9]+",' ', l)
+
+            tweet_list.append(tweet)
+
+        return tweet_list
+
+
+    def replace_slang(self):
+
+        ###################
+        # Create slang dictionary from tsv
+        ##################
+
+        slang_dict = {}
+        slang_list = []
+
+        lines  = open(path_to_slang_dictionary, 'r').readlines()
+
+        for line in lines:
+
+            spline = line.replace('\n', '').split('\t')
+            slang_dict[spline[0]] = spline[1]
+            slang_list.append(spline[0])
+
+
+        # remember to make all lower case! emoticons must be processed before slangs.
+
+        list = self.remove_punctuation()
+
+        tweet_list = []
+
+        for l in list:
+
+        # IMPORTANT! must split the sentence into words
+        # cannot directly match substsring to string
+        # otherwise mistakes such as this will occur: 'ur here because our' ==> 'you are here because oyou are'
+        # ALTERNATIVELY: add space to front and back of the slang terms in the dictionary, then no need to split string
+
+            tl = l.lower().split()
+
+            for sl in slang_list:
+
+                if sl in tl:
+
+                    tl = [slang_dict[sl] if x==sl else x for x in tl] #!important!
+
+            # stitch the list of strings together into one single string
+            final_tweet = ' '.join(tl)
+
+            tweet_list.append(final_tweet)
+
+
+        f = open('tweets/preprocessed_tweets.txt', 'w')
+
+        for tl in tweet_list:
+            f.write(tl+'\n')
+
+        f.close()
+
         print (tweet_list)
-        print (len(tweet_list))
+
+        return (tweet_list)
+
 
 
 if __name__ == "__main__":
 
+    path_to_raw_tweet = 'tweets.txt'
+    path_to_emoticon_dictionary = 'emoticons/emo_dict.txt'
+    path_to_slang_dictionary = 'slangs/SlangLookupTable.txt'
+
     tp = TweetPreprocessing()
     #tp.remove_url_mention_hashtag()
     #tp.expand_contraction()
-    tp.replace_emoticon()
+    #tp.replace_emoticon()
+    #tp.remove_punctuation()
+    tp.replace_slang()
 
 
 

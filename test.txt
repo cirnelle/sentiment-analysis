@@ -1,12 +1,10 @@
-:]
-:(
->:-)
->:(
-XD
-<3
-;)
->;-)
-\\:
-:)
-:-D
-(-8
+free, 0.1875, 0.0
+inaccurate, 0.125, 0.625
+loose, 0.125, 0.0
+unloose, 0.375, 0
+unloosen, 0.375, 0
+used to, 0, 0.375
+wide of the mark, 0, 0.625
+there you go, 0.1, 0.09
+wont to, 0, 0.375
+go, 0.5, 0

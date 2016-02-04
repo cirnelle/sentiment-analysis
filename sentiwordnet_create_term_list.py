@@ -90,7 +90,7 @@ class SentiWordNetList():
         print ("Length of top sense list is "+str(len(only_top_sense)))
 
 
-        f = open('../data_files/SentiWordNet/SentiWordNet_top.txt', 'w')
+        f = open('sentiment_score/SentiWordNet_top.txt', 'w')
 
         for ots in only_top_sense:
             f.write(', '.join(ots)+'\n')
@@ -125,7 +125,7 @@ class SentiWordNetList():
 
 
 
-        f = open('../data_files/SentiWordNet/without_neutral.txt', 'w')
+        f = open('sentiment_score/without_neutral.txt', 'w')
 
         for wn in without_neutral:
             f.write(', '.join(wn)+'\n')
@@ -219,7 +219,7 @@ class SentiWordNetList():
 
         print ("Length of average sentiment list is "+str(len(final_list)))
 
-        f = open('../data_files/SentiWordNet/average_sentiment.txt', 'w')
+        f = open('sentiment_score/average_sentiment.txt', 'w')
 
         for wn in final_list:
             f.write(', '.join(wn)+'\n')
@@ -228,22 +228,26 @@ class SentiWordNetList():
 
     def average_no_neutral(self):
 
-        avg_no_neutral = []
+        avg_sentiment_list = []
 
-        lines = open('../data_files/SentiWordNet/average_sentiment.txt', 'r').readlines()
+        lines = open('sentiment_score/average_sentiment.txt', 'r').readlines()
 
         for line in lines:
             # also remove underscore in between ngram words!
             spline = line.replace('\n', '').split(', ')
-            avg_no_neutral.append(spline)
+            avg_sentiment_list.append(spline)
 
-        print (len(avg_no_neutral))
+        print ("Length of average sentiment list is "+str(len(avg_sentiment_list)))
 
         without_neutral = []
 
-        for ann in avg_no_neutral:
-            if not ((ann[1] == '0' and ann[2] == '0') or (ann[1] == '0.0' and ann[2] == '0.0')):
-                without_neutral.append(ann)
+        for asl in avg_sentiment_list:
+            if not ((asl[1] == '0' and asl[2] == '0') or (asl[1] == '0.0' and asl[2] == '0.0')):
+
+                # replace underscore in between words with blank
+                asl[0] = asl[0].replace('_', ' ')
+
+                without_neutral.append(asl)
 
         without_neutral.sort(key=lambda x: x[0])
 
@@ -251,7 +255,7 @@ class SentiWordNetList():
         print ("Length of average no neutral list is "+str(len(without_neutral)))
 
 
-        f = open('../data_files/SentiWordNet/avg_no_neutral.txt', 'w')
+        f = open('sentiment_score/avg_no_neutral.txt', 'w')
 
         for wn in without_neutral:
             f.write(', '.join(wn)+'\n')
@@ -272,7 +276,7 @@ if __name__ == "__main__":
     # Run code from IDE #
     #####################
 
-    path_to_term_file = '../data_files/SentiWordNet/test.txt'
+    path_to_term_file = 'sentiment_score/SentiWordNet_INPUT.txt'
 
     ############
     # Create list with top sense
@@ -298,7 +302,7 @@ if __name__ == "__main__":
     # Create average sentiment list without neutral terms
     ##########
 
-    #swn.average_no_neutral()
+    swn.average_no_neutral()
 
 
     ################################

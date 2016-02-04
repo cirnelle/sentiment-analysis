@@ -66,7 +66,7 @@ for line in lines:
 
     try:
 
-        if '\\' in line:
+        if line[1] == '\\' or line[2] == '\\' or line[3] == '\\':
             l.append(line)
             l.append('confused')
             list.append(l)
