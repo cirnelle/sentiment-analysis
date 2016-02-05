@@ -12,6 +12,8 @@ class TweetPreprocessing():
 
 
     def remove_url_mention_hashtag(self):
+
+        print ("Removing URL, mentions and hashtags...")
         tweet_list = []
 
         lines = open(path_to_raw_tweet, 'r').readlines()
@@ -44,42 +46,61 @@ class TweetPreprocessing():
 
     def expand_contraction(self):
 
+        print ("Expanding contractions ...")
+
         contractions_dict = {
             'isn\'t': 'is not',
+            'isn’t': 'is not',
             'isnt': 'is not',
             'aren\'t': 'are not',
+            'aren’t': 'are not',
             'arent': 'are not',
             'wasn\'t': 'was not',
+            'wasn’t': 'was not',
             'wasnt': 'was not',
             'weren\'t': 'were not',
+            'weren’t': 'were not',
             'werent': 'were not',
             'haven\'t': 'have not',
+            'haven’t': 'have not',
             'havent': 'have not',
             'hasn\'t': 'has not',
+            'hasn’t': 'has not',
             'hasnt': 'has not',
             'hadn\'t': 'had not',
+            'hadn’t': 'had not',
             'hadnt': 'had not',
             'won\'t': 'will not',
+            'won’t': 'will not',
             'wouldn\'t': 'would not',
+            'wouldn’t': 'would not',
             'wouldnt': 'would not',
             'didn\'t': 'did not',
+            'didn’t' : 'did not',
             'didnt' : 'did not',
             'don\'t' : 'do not',
             'don’t' : 'do not',
             'dont' : 'do not',
             'doesn\'t': 'does not',
+            'doesn’t': 'does not',
             'doesnt': 'does not',
             'can\'t': 'can not',
+            'can’t': 'can not',
             'cant': 'can not',
             'couldn\'t': 'could not',
+            'couldn’t': 'could not',
             'couldnt': 'could not',
             'shouldn\'t': 'should not',
+            'shouldn’t': 'should not',
             'shouldnt': 'should not',
             'mightn\'t': 'might not',
+            'mightn’t': 'might not',
             'mightnt': 'might not',
             'mustn\'t': 'must not',
+            'mustn’t': 'must not',
             'mustnt': 'must not',
             'shan\'t': 'shall not',
+            'shan’t': 'shall not',
             'shant': 'shall not',
             }
 
@@ -102,6 +123,8 @@ class TweetPreprocessing():
 
     def replace_emoticon(self):
 
+        print ("replacing emoticons ...")
+
         ###################
         # Create emoticon dictionary from tsv
         ##################
@@ -113,6 +136,8 @@ class TweetPreprocessing():
         for line in lines:
 
             spline = line.replace('\n', '').split('\t')
+            spline[0] = ' '+spline[0]+' '
+
             emoticon_dict[spline[0]] = spline[1]
 
 
@@ -141,7 +166,13 @@ class TweetPreprocessing():
 
         list = self.expand_contraction()
 
+        # add blank space to front and end of line for each tweet, in case the emoticon is the first or last word in the sentence
+        # e.g. if tweet is "this is a tweet ;)' the smiley face won't be detected because there is no space after it!
+
+        list=[' '+l+' ' for l in list]
+
         tweet_list = []
+
 
         emoticon_re = re.compile(emoticon_string, re.VERBOSE | re.I | re.UNICODE)
 
@@ -150,9 +181,14 @@ class TweetPreprocessing():
             # re.findall() method returns all non-overlapping matches of pattern in string, as a list of strings.(e.g. [':)', ':-(']
             emoticon = emoticon_re.findall(l)
 
+            # add space to front and end of emoticon so that whole emoticon can be detected
+            # otherwise substring of string will also be replaced (e.g. explain => eplayfullain)
+            emoticon = [' '+e+' ' for e in emoticon]
+
+
             # if no emoticons in tweet, append the tweet to tweet list unchanged
             if emoticon == []:
-                print ("no emoticon in this tweet")
+                #print ("no emoticon in this tweet")
                 tweet_list.append(l)
 
             else:
@@ -163,16 +199,18 @@ class TweetPreprocessing():
 
                     if key in emoticon_dict:
 
-                        print ("emoticon "+str(e)+" in dict")
+                        #print ("emoticon "+str(e)+" in dict")
 
-                        el = l.replace(e, emoticon_dict[e])
+                        # add space to front and end of value (e.g. 'happy') too!
+                        # to avoid situation e.g. sethappyto
+                        el = l.replace(e, ' '+emoticon_dict[e]+' ')
 
                         # the following line makes sure that if there are more than one emoticon in the tweet,
                         # all emoticons are replaced
                         l = el
 
                     else:
-                        print ("emoticon "+str(e)+" not in dict")
+                        #print ("emoticon "+str(e)+" not in dict")
                         el = l.replace(e,' ')
                         l = el
 
@@ -181,6 +219,8 @@ class TweetPreprocessing():
         return tweet_list
 
     def remove_punctuation(self):
+
+        print ("Removing punctuations ...")
 
         #####################
         # Need to remove punctuation because of slang lookup (and also ngram lookup)
@@ -206,6 +246,8 @@ class TweetPreprocessing():
 
 
     def replace_slang(self):
+
+        print ("Replacing slangs ...")
 
         ###################
         # Create slang dictionary from tsv
@@ -257,15 +299,13 @@ class TweetPreprocessing():
 
         f.close()
 
-        print (tweet_list)
-
         return (tweet_list)
 
 
 
 if __name__ == "__main__":
 
-    path_to_raw_tweet = 'tweets.txt'
+    path_to_raw_tweet = 'tweets/raw_tweets.txt'
     path_to_emoticon_dictionary = 'emoticons/emo_dict.txt'
     path_to_slang_dictionary = 'slangs/SlangLookupTable.txt'
 

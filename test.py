@@ -1,26 +1,9 @@
 __author__ = 'yi-linghwong'
 
 import sys
+import time
 
-
-slang_list = ['ur', 'brb']
-
-tweet_list = ['ur here because of our', 'i am ur uruguay']
-
-dict = {'ur': 'you are'}
-
-for tl in tweet_list:
-    tl = tl.split()
-
-    #for sl in slang_list:
-
-    if any(slang in tl for slang in slang_list):
-
-        print (tl)
-
-        tl = [dict[slang] if x==slang else x for x in tl]
-
-        print (tl)
+print (time.time())
 
 
 
