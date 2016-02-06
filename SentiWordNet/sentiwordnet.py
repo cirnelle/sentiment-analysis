@@ -9,8 +9,6 @@ class SentiWordNetScore():
 
     def create_senti_dict(self):
 
-
-
         lines = open(path_to_sentiment_dictionary, 'r').readlines()
 
         senti_dict = {}
@@ -27,6 +25,7 @@ class SentiWordNetScore():
             spline[0] = ' '+spline[0]+' '
 
             senti_dict[spline[0]] = {'pos':spline[1],'neg':spline[2]}
+
 
         print ("Length of sentiment dictionary is "+str(len(senti_dict)))
 
@@ -49,7 +48,10 @@ class SentiWordNetScore():
 
     def create_ngram_list(self):
 
+        ################
         # create a list of the ngrams from sentiment dictionary (only the terms, without their score)
+        # i.e. ['go off the mark', 'going away', 'laughing', ...]
+        ################
 
         ngram_list = []
 
@@ -75,6 +77,8 @@ class SentiWordNetScore():
 
         print ("Length of tweet list is "+str(len(tweet_list)))
         print ("Length of ngram list is "+str(len(tweet_list)))
+
+        # add white space to front and end of terms so whole words can be matched
 
         ngram_list = [' '+nl+' ' for nl in ngram_list]
 
@@ -148,4 +152,4 @@ if __name__ == "__main__":
 
     #swn.create_ngram_list()
 
-    swn.calculate_senti_score()
+    #swn.calculate_senti_score()
