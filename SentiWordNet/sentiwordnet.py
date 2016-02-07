@@ -5,7 +5,7 @@ import sys
 import time
 
 
-class SentiWordNetScore():
+class SentiWordNet():
 
     def create_senti_dict(self):
 
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     path_to_tweet_list = '../tweets/preprocessed_tweets.txt'
     path_to_sentiment_dictionary = 'dictionary/avg_no_neutral.txt'
 
-    swn = SentiWordNetScore()
+    swn = SentiWordNet()
 
     #swn.create_senti_dict()
 

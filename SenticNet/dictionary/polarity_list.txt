@@ -1,0 +1,13 @@
+32_teeth	0.903
+a_little	-0.566
+a_lot	0.258
+a_lot_of_books	0.047
+a_lot_of_energy	0.255
+abandon	-0.566
+zit	-0.067
+zombi	-0.815
+zombie	-0.083
+zone	0.056
+zone_out	0.619
+zonk_out	-0.558
+zoology	0.093

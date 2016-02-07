@@ -5,7 +5,7 @@ import sys
 import time
 
 
-class labMTSentimentAnalysis():
+class labMT():
 
     def create_senti_list(self):
 
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     path_to_labMT_file = 'dictionary/labMT_MASTER_no_neutral.txt'
     path_to_tweet_list = 'test.txt'
 
-    lmt = labMTSentimentAnalysis()
+    lmt = labMT()
     #lmt.create_senti_list()
     #lmt.create_senti_dict()
     #lmt.create_term_list()
