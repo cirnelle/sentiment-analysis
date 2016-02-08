@@ -16,7 +16,7 @@ class SenticNet():
 	# this function is not really needed if we have the concept list
 	#############
 
-		lines = open('test.txt', 'r').readlines()
+		lines = open(path_to_concept_url_list, 'r').readlines()
 
 		concept_url_list = []
 
@@ -35,7 +35,7 @@ class SenticNet():
 	# Create a list of concepts, e.g. ['32_teeth', 'a_lot_of_space']
 	#############
 
-		lines = open('test1.txt','r').readlines()
+		lines = open(path_to_concept_list,'r').readlines()
 
 		concept_list = []
 
@@ -68,8 +68,23 @@ class SenticNet():
 		# sort ngram_list by the number of words, so that longer-grams come first
 		ngram_list.sort(key=lambda x: len(x.split()), reverse=True)
 
+		print ("Length of ngram list is "+str(len(ngram_list)))
+
 		return (ngram_list)
 
+
+	def create_tweet_list(self):
+
+		# create a list of tweets, e.g. ['This is the first tweet', 'This is another tweet', ...]
+		# splitlines method to remove '\n' from end of line
+		lines = open(path_to_processed_tweets).read().splitlines()
+
+		# add blank space to front and end of line for each tweet, in case the ngram is the first or last word in the sentence
+		# e.g. ngram = ' the end ', and the tweet is 'that is the end', if we don't add space the ngram won't be detected
+
+		lines=[' '+x+' ' for x in lines]
+
+		return lines
 
 	def get_sentiment_polarity(self):
 
@@ -85,9 +100,9 @@ class SenticNet():
 
 		polarity_list = []
 
-		t1 = time.time()
-
 		print ("creating sentiment polarity list ...")
+
+		t1 = time.time()
 
 		for cl in concept_list:
 
@@ -125,10 +140,10 @@ class SenticNet():
 
 	def create_polarity_dict(self):
 
-	#############
+	###############
 	# Create a polarity dictionary using the polarity_list.txt as input file
 	# result: {' a little ': -0.125, ' a lot of books ': '0.047', ...}
-	#############
+	###############
 
 		lines = open('dictionary/polarity_list.txt','r').readlines()
 
@@ -148,41 +163,81 @@ class SenticNet():
 
 			polarity_dict[spline[0]] = spline[1]
 
-		print ("Length of polarity dict is "+str(len(polarity_dict))
+		print ("Length of polarity dict is "+str(len(polarity_dict)))
 
 		return polarity_dict
 
-	
+	def calculate_senti_score(self):
+
+		senti_dict = self.create_polarity_dict()
+		tweet_list = self.create_tweet_list()
+		ngram_list = self.create_ngram_list()
+
+		# add white space to front and end of terms so whole words can be matched
+
+		ngram_list = [' '+nl+' ' for nl in ngram_list]
+
+		tweet_score_list = []
+
+		print ("Calculating sentiment score ...")
+
+		t1 = time.time()
+
+		for tl in tweet_list:
+
+			tl = tl.lower()
+
+			tweet_score = []
+
+			string = tl
+
+			senti_score = 0
+
+			for nl in ngram_list:
+
+				substring = nl
+
+				if substring in string:
+
+					senti_score += float(senti_dict[substring])
+
+					# remove the substring (which are ngrams) from the tweet and replace with space
+					# so that if two adjacent sentiment terms are found they can be detected
+					string = string.replace(substring,' ')
 
 
+			tweet_score.append(str(round((senti_score),3)))
+			tweet_score.append(tl)
+
+			tweet_score_list.append(tweet_score)
+
+		t2 = time.time()
+
+		total_time = (t2 - t1)/60
+
+		print ("Computing time was "+str(total_time)+" minutes.")
+
+		f = open('results/tweets_senti_score.txt', 'w')
+
+		for tsl in tweet_score_list:
+			f.write(', '.join(tsl)+'\n')
+
+		f.close()
+
+		return tweet_score_list
 
 
-
-
-'''
-graph = rdflib.Graph()
-graph.parse(location='test.rdf.xml')
-
-
-objects = graph.objects(subject=URIRef("http://sentic.net/api/en/concept/32_teeth"),predicate = URIRef("http://sentic.net/apipolarity"))
-
-for o in objects:
-	print (o)
-
-for s,p,o in graph:
-
-	print (s)
-
-'''
 
 if __name__ == "__main__":
 
 	path_to_concept_url_list = 'dictionary/concept_url.txt'
-	path_to_concept_list = 'dictionary/concents.txt'
+	path_to_concept_list = 'dictionary/concepts.txt'
+	path_to_processed_tweets = '../tweets/preprocessed_tweets.txt'
 
 	sn = SenticNet()
 	#sn.create_concept_list()
 	#sn.create_ngram_list()
 	#sn.get_sentiment_polarity()
-	sn.create_polarity_dict()
+	#sn.create_polarity_dict()
+	sn.calculate_senti_score()
 
