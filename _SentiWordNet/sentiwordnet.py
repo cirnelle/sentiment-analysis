@@ -27,7 +27,7 @@ class SentiWordNet():
             senti_dict[spline[0]] = {'pos':spline[1],'neg':spline[2]}
 
 
-        print ("Length of sentiment dictionary is "+str(len(senti_dict)))
+        #print ("Length of sentiment dictionary is "+str(len(senti_dict)))
 
         return senti_dict
 
@@ -36,7 +36,7 @@ class SentiWordNet():
 
         # create a list of tweets, e.g. ['This is the first tweet', 'This is another tweet', ...]
         # splitlines method to remove '\n' from end of line
-        lines = open(path_to_tweet_list).read().splitlines()
+        lines = open(path_to_processed_tweet_file).read().splitlines()
 
         # add blank space to front and end of line for each tweet, in case the ngram is the first or last word in the sentence
         # e.g. ngram = ' the end ', and the tweet is 'that is the end', if we don't add space the ngram won't be detected
@@ -76,13 +76,13 @@ class SentiWordNet():
         ngram_list = self.create_ngram_list()
 
         print ("Length of tweet list is "+str(len(tweet_list)))
-        print ("Length of ngram list is "+str(len(tweet_list)))
 
         # add white space to front and end of terms so whole words can be matched
 
         ngram_list = [' '+nl+' ' for nl in ngram_list]
 
         tweet_score_list = []
+        tweet_score_list_polarity = []
 
         print ("Calculating sentiment score ...")
 
@@ -93,6 +93,7 @@ class SentiWordNet():
             tl = tl.lower()
 
             tweet_score = []
+            tweet_score_c = []
 
             string = tl
 
@@ -123,16 +124,44 @@ class SentiWordNet():
 
             tweet_score_list.append(tweet_score)
 
+            # calculate the polarity (i.e. 'pos', 'neg' or 'neutral')
+
+            sentiment = pos_score - neg_score
+
+            if sentiment > 0:
+                tweet_score_c.append('pos')
+
+            elif sentiment < 0:
+
+                tweet_score_c.append('neg')
+
+            # if tweet has neutral score classify it as negative (only for datasets that do not have neutral!)
+            elif sentiment == 0:
+                tweet_score_c.append('neg')
+
+            else:
+                print ("error")
+
+            tweet_score_c.append(tl)
+            tweet_score_list_polarity.append(tweet_score_c)
+
         t2 = time.time()
 
         total_time = (t2 - t1)/60
 
         print ("Computing time was "+str(total_time)+" minutes.")
 
-        f = open('results/tweets_senti_score.txt', 'w')
+        f = open(path_to_store_results_score, 'w')
 
         for tsl in tweet_score_list:
-            f.write(', '.join(tsl)+'\n')
+            f.write(','.join(tsl)+'\n')
+
+        f.close()
+
+        f = open(path_to_store_results_polarity, 'w')
+
+        for tslp in tweet_score_list_polarity:
+            f.write(','.join(tslp)+'\n')
 
         f.close()
 
@@ -141,8 +170,10 @@ class SentiWordNet():
 
 if __name__ == "__main__":
 
-    path_to_tweet_list = '../tweets/preprocessed_tweets.txt'
+    path_to_processed_tweet_file = '../tweets/preprocessed_tweets_SS_noneutral.txt'
     path_to_sentiment_dictionary = 'dictionary/avg_no_neutral.txt'
+    path_to_store_results_score = 'results/SS_noneutral_tweets_senti_score.txt'
+    path_to_store_results_polarity = 'results/SS_noneutral_tweets_senti_polarity.txt'
 
     swn = SentiWordNet()
 
@@ -152,4 +183,4 @@ if __name__ == "__main__":
 
     #swn.create_ngram_list()
 
-    #swn.calculate_senti_score()
+    swn.calculate_senti_score()

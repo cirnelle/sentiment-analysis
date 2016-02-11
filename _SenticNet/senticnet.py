@@ -44,7 +44,7 @@ class SenticNet():
 
 			concept_list.append(spline)
 
-		print ("Length of concept list is "+str(len(concept_list)))
+		#print ("Length of concept list is "+str(len(concept_list)))
 
 		return (concept_list)
 
@@ -68,7 +68,7 @@ class SenticNet():
 		# sort ngram_list by the number of words, so that longer-grams come first
 		ngram_list.sort(key=lambda x: len(x.split()), reverse=True)
 
-		print ("Length of ngram list is "+str(len(ngram_list)))
+		#print ("Length of ngram list is "+str(len(ngram_list)))
 
 		return (ngram_list)
 
@@ -77,7 +77,9 @@ class SenticNet():
 
 		# create a list of tweets, e.g. ['This is the first tweet', 'This is another tweet', ...]
 		# splitlines method to remove '\n' from end of line
-		lines = open(path_to_processed_tweets).read().splitlines()
+		lines = open(path_to_processed_tweet_file).read().splitlines()
+
+		print ("Length of preprocessed tweet is "+str(len(lines)))
 
 		# add blank space to front and end of line for each tweet, in case the ngram is the first or last word in the sentence
 		# e.g. ngram = ' the end ', and the tweet is 'that is the end', if we don't add space the ngram won't be detected
@@ -163,7 +165,7 @@ class SenticNet():
 
 			polarity_dict[spline[0]] = spline[1]
 
-		print ("Length of polarity dict is "+str(len(polarity_dict)))
+		#print ("Length of polarity dict is "+str(len(polarity_dict)))
 
 		return polarity_dict
 
@@ -178,6 +180,7 @@ class SenticNet():
 		ngram_list = [' '+nl+' ' for nl in ngram_list]
 
 		tweet_score_list = []
+		tweet_score_list_polarity = []
 
 		print ("Calculating sentiment score ...")
 
@@ -188,6 +191,7 @@ class SenticNet():
 			tl = tl.lower()
 
 			tweet_score = []
+			tweet_score_c = []
 
 			string = tl
 
@@ -211,16 +215,41 @@ class SenticNet():
 
 			tweet_score_list.append(tweet_score)
 
+			if senti_score > 0:
+				tweet_score_c.append('pos')
+
+			elif senti_score < 0:
+				tweet_score_c.append('neg')
+
+			# if tweet has neutral score classify it as negative (only for datasets that do not have neutral!)
+			elif senti_score == 0:
+				tweet_score_c.append('neg')
+
+			else:
+				print ("error")
+
+			tweet_score_c.append(tl)
+			tweet_score_list_polarity.append(tweet_score_c)
+
 		t2 = time.time()
 
 		total_time = (t2 - t1)/60
 
 		print ("Computing time was "+str(total_time)+" minutes.")
 
-		f = open('results/tweets_senti_score.txt', 'w')
+		print ("Length of tweet polarity list is "+str(len(tweet_score_list_polarity)))
+
+		f = open(path_to_store_results_score, 'w')
 
 		for tsl in tweet_score_list:
-			f.write(', '.join(tsl)+'\n')
+			f.write(','.join(tsl)+'\n')
+
+		f.close()
+
+		f = open(path_to_store_results_polarity, 'w')
+
+		for tslp in tweet_score_list_polarity:
+			f.write(','.join(tslp)+'\n')
 
 		f.close()
 
@@ -230,9 +259,13 @@ class SenticNet():
 
 if __name__ == "__main__":
 
+	path_to_processed_tweet_file = '../tweets/preprocessed_tweets_SS_noneutral.txt'
 	path_to_concept_url_list = 'dictionary/concept_url.txt'
 	path_to_concept_list = 'dictionary/concepts.txt'
-	path_to_processed_tweets = '../tweets/preprocessed_tweets.txt'
+	path_to_store_results_score = 'results/SS_noneutral_tweets_senti_score.txt'
+	path_to_store_results_polarity = 'results/SS_noneutral_tweets_senti_polarity.txt'
+
+
 
 	sn = SenticNet()
 	#sn.create_concept_list()

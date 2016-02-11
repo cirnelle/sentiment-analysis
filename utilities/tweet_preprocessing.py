@@ -13,10 +13,11 @@ class TweetPreprocessing():
 
     def remove_url_mention_hashtag(self):
 
-        print ("Removing URL, mentions and hashtags...")
         tweet_list = []
 
         lines = open(path_to_raw_tweet, 'r').readlines()
+
+        print ("Removing URL, mentions and hashtags...")
 
         for line in lines:
 
@@ -45,8 +46,6 @@ class TweetPreprocessing():
 
 
     def expand_contraction(self):
-
-        print ("Expanding contractions ...")
 
         contractions_dict = {
             'isn\'t': 'is not',
@@ -114,6 +113,8 @@ class TweetPreprocessing():
 
             return contractions_dict[match.group(0).lower()]
 
+        print ("Expanding contractions ...")
+
         for l in list:
 
             tweet_list.append(contractions_re.sub(replace, l))
@@ -122,8 +123,6 @@ class TweetPreprocessing():
 
 
     def replace_emoticon(self):
-
-        print ("replacing emoticons ...")
 
         ###################
         # Create emoticon dictionary from tsv
@@ -173,8 +172,9 @@ class TweetPreprocessing():
 
         tweet_list = []
 
-
         emoticon_re = re.compile(emoticon_string, re.VERBOSE | re.I | re.UNICODE)
+
+        print ("replacing emoticons ...")
 
         for l in list:
 
@@ -220,8 +220,6 @@ class TweetPreprocessing():
 
     def remove_punctuation(self):
 
-        print ("Removing punctuations ...")
-
         #####################
         # Need to remove punctuation because of slang lookup (and also ngram lookup)
         # e.g. 'ur' is replaced with 'you are' in slang dict, but if tweet contains 'i am ur, so i come'
@@ -235,6 +233,8 @@ class TweetPreprocessing():
 
         list = self.replace_emoticon()
 
+        print ("Removing punctuations ...")
+
         for l in list:
 
             #remove special characters
@@ -247,8 +247,6 @@ class TweetPreprocessing():
 
     def replace_slang(self):
 
-        print ("Replacing slangs ...")
-
         ###################
         # Create slang dictionary from tsv
         ##################
@@ -257,6 +255,8 @@ class TweetPreprocessing():
         slang_list = []
 
         lines  = open(path_to_slang_dictionary, 'r').readlines()
+
+        print ("Replacing slangs ...")
 
         for line in lines:
 
@@ -292,7 +292,7 @@ class TweetPreprocessing():
             tweet_list.append(final_tweet)
 
 
-        f = open('tweets/preprocessed_tweets.txt', 'w')
+        f = open(path_to_store_preprocessed_tweets, 'w')
 
         for tl in tweet_list:
             f.write(tl+'\n')
@@ -305,9 +305,10 @@ class TweetPreprocessing():
 
 if __name__ == "__main__":
 
-    path_to_raw_tweet = 'tweets/raw_tweets.txt'
-    path_to_emoticon_dictionary = 'emoticons/emo_dict.txt'
-    path_to_slang_dictionary = 'slangs/SlangLookupTable.txt'
+    path_to_raw_tweet = '../tweets/raw_tweets_SS_noneutral.txt'
+    path_to_emoticon_dictionary = '../emoticons/emo_dict.txt'
+    path_to_slang_dictionary = '../slangs/SlangLookupTable.txt'
+    path_to_store_preprocessed_tweets = '../tweets/preprocessed_tweets_SS_noneutral.txt'
 
     tp = TweetPreprocessing()
     #tp.remove_url_mention_hashtag()

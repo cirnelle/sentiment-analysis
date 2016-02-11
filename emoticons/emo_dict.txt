@@ -1967,6 +1967,7 @@ P8	playful
 ^^	grinning
 ^.^	grinning
 ^_^	grinning
+^-^	grinning
 xD	grinning
 xd	happy
 xP	playful
