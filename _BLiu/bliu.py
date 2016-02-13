@@ -225,17 +225,17 @@ class BLiu():
 
 
 if __name__ == "__main__":
-    path_to_processed_tweet_file = '../tweets/preprocessed_tweets_SS_noneutral.txt'
+    path_to_processed_tweet_file = '../tweets/preprocessed_tweets_sts_gold.txt'
     path_to_sentiment_dictionary = 'dictionary/all_words.txt'
-    path_to_store_results_score = 'results/SS_noneutral_tweets_senti_score.txt'
-    path_to_store_results_polarity = 'results/SS_noneutral_tweets_senti_polarity.txt'
+    path_to_store_results_score = 'results/sts_gold_tweets_senti_score.txt'
+    path_to_store_results_polarity = 'results/sts_gold_tweets_senti_polarity.txt'
 
     bl = BLiu()
 
     #bl.remove_duplicates()
-    bl.combine_dicts()
+    #bl.combine_dicts()
     #bl.create_senti_dict()
     #bl.create_tweet_list()
     #bl.create_word_list()
-    #bl.calculate_senti_score()
+    bl.calculate_senti_score()
 
