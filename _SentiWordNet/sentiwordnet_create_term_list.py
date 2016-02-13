@@ -290,7 +290,7 @@ if __name__ == "__main__":
 
     # Use EITHER without_neutral OR average_sentiments, not both!
 
-    #swn.without_neutral()
+    swn.without_neutral()
 
     ##########
     # Create list with average sentiments (from top sense list)
@@ -302,7 +302,7 @@ if __name__ == "__main__":
     # Create average sentiment list without neutral terms
     ##########
 
-    swn.average_no_neutral()
+    #swn.average_no_neutral()
 
 
     ################################

@@ -36,11 +36,15 @@ class TweetPreprocessing():
 
             t4 = re.sub(r"&amp;", "and", t3).strip()
 
+            # replace &amp with 'and'
+
+            t5 = re.sub(r"&amp", "and", t4).strip()
+
             # replace <3 with 'love'
 
-            t5 = re.sub(r"<3", "love", t4).strip()
+            t6 = re.sub(r"<3", "love", t5).strip()
 
-            tweet_list.append(t5)
+            tweet_list.append(t6)
 
         return tweet_list
 
@@ -48,60 +52,60 @@ class TweetPreprocessing():
     def expand_contraction(self):
 
         contractions_dict = {
-            'isn\'t': 'is not',
-            'isn’t': 'is not',
-            'isnt': 'is not',
-            'aren\'t': 'are not',
-            'aren’t': 'are not',
-            'arent': 'are not',
-            'wasn\'t': 'was not',
-            'wasn’t': 'was not',
-            'wasnt': 'was not',
-            'weren\'t': 'were not',
-            'weren’t': 'were not',
-            'werent': 'were not',
-            'haven\'t': 'have not',
-            'haven’t': 'have not',
-            'havent': 'have not',
-            'hasn\'t': 'has not',
-            'hasn’t': 'has not',
-            'hasnt': 'has not',
-            'hadn\'t': 'had not',
-            'hadn’t': 'had not',
-            'hadnt': 'had not',
-            'won\'t': 'will not',
-            'won’t': 'will not',
-            'wouldn\'t': 'would not',
-            'wouldn’t': 'would not',
-            'wouldnt': 'would not',
-            'didn\'t': 'did not',
-            'didn’t' : 'did not',
-            'didnt' : 'did not',
-            'don\'t' : 'do not',
-            'don’t' : 'do not',
-            'dont' : 'do not',
-            'doesn\'t': 'does not',
-            'doesn’t': 'does not',
-            'doesnt': 'does not',
-            'can\'t': 'can not',
-            'can’t': 'can not',
-            'cant': 'can not',
-            'couldn\'t': 'could not',
-            'couldn’t': 'could not',
-            'couldnt': 'could not',
-            'shouldn\'t': 'should not',
-            'shouldn’t': 'should not',
-            'shouldnt': 'should not',
-            'mightn\'t': 'might not',
-            'mightn’t': 'might not',
-            'mightnt': 'might not',
-            'mustn\'t': 'must not',
-            'mustn’t': 'must not',
-            'mustnt': 'must not',
-            'shan\'t': 'shall not',
-            'shan’t': 'shall not',
-            'shant': 'shall not',
-            }
+            ' isn\'t ': ' is not ',
+            ' isn’t ': ' is not ',
+            ' isnt ': ' is not ',
+            ' aren\'t ': ' are not ',
+            ' aren’t ': ' are not ',
+            ' arent ': ' are not ',
+            ' wasn\'t ': ' was not ',
+            ' wasn’t ': ' was not ',
+            ' wasnt ': ' was not ',
+            ' weren\'t ': ' were not ',
+            ' weren’t ': ' were not ',
+            ' werent ': ' were not ',
+            ' haven\'t ': ' have not ',
+            ' haven’t ': ' have not ',
+            ' havent ': ' have not ',
+            ' hasn\'t ': ' has not ',
+            ' hasn’t ': ' has not ',
+            ' hasnt ': ' has not ',
+            ' hadn\'t ': ' had not ',
+            ' hadn’t ': ' had not ',
+            ' hadnt ': ' had not ',
+            ' won\'t ': ' will not ',
+            ' won’t ': ' will not ',
+            ' wouldn\'t ': ' would not ',
+            ' wouldn’t ': ' would not ',
+            ' wouldnt ': ' would not ',
+            ' didn\'t ': ' did not ',
+            ' didn’t ': ' did not ',
+            ' didnt ': ' did not ',
+            ' don\'t ': ' do not ',
+            ' don’t ': ' do not ',
+            ' dont ': ' do not ',
+            ' doesn\'t ': ' does not ',
+            ' doesn’t ': ' does not ',
+            ' doesnt ': ' does not ',
+            ' can\'t ': ' can not ',
+            ' can’t ': ' can not ',
+            ' cant ': ' can not ',
+            ' couldn\'t ': ' could not ',
+            ' couldn’t ': ' could not ',
+            ' couldnt ': ' could not ',
+            ' shouldn\'t ': ' should not ',
+            ' shouldn’t ': ' should not ',
+            ' shouldnt ': ' should not ',
+            ' mightn\'t ': ' might not ',
+            ' mightn’t ': ' might not ',
+            ' mightnt ': ' might not ',
+            ' mustn\'t ': ' must not ',
+            ' mustn’t ': ' must not ',
+            ' mustnt ': ' must not ',
+            ' shan\'t ': ' shall not ',
+            ' shan’t ': ' shall not ',
+            ' shant ': ' shall not ',
+        }
 
         list = self.remove_url_mention_hashtag()
         tweet_list = []
@@ -288,6 +292,9 @@ class TweetPreprocessing():
 
             # stitch the list of strings together into one single string
             final_tweet = ' '.join(tl)
+
+            final_tweet = final_tweet.lower()
+
 
             tweet_list.append(final_tweet)
 
