@@ -143,7 +143,47 @@ class TweetPreprocessing():
 
             emoticon_dict[spline[0]] = spline[1]
 
+        # create emoticon list
 
+        emoticon_list = []
+
+        for line in lines:
+            spline = line.replace('\n','').split('\t')
+            spline[0] = ' '+spline[0]+' '
+            emoticon_list.append(spline[0])
+
+        ###############
+        # replace emoticons with their corresponding emotions from emoticon dict
+        ###############
+
+        list = self.expand_contraction()
+
+        tweets = []
+
+        for l in list:
+
+            # if tweet starts and ends with double quotes, remove them
+
+            if l.startswith('"') and l.endswith('"'):
+                l = l[1:-1]
+            tweets.append(l)
+
+        # add space to front and back of tweet, in case the emoticon is the first or last in the sentence
+
+        tweets = [' '+t+' ' for t in tweets]
+
+        tweet_list = []
+
+        for t in tweets:
+            for el in emoticon_list:
+                if el in t:
+                    t = t.replace(el,' '+emoticon_dict[el]+' ')
+
+            tweet_list.append(t)
+
+        return tweet_list
+
+        '''
         ####################
         # The emoticon regex list below is a modified version taken from Chris Pott's tokenizer script
         ####################
@@ -221,6 +261,8 @@ class TweetPreprocessing():
                 tweet_list.append(el)
 
         return tweet_list
+
+        '''
 
     def remove_punctuation(self):
 
@@ -312,11 +354,11 @@ class TweetPreprocessing():
 
 if __name__ == "__main__":
 
-    #path_to_raw_tweet = '../tweets/raw_tweets_sts_gold.txt'
+    #path_to_raw_tweet = '../tweets/raw_tweets_SS_noneutral.txt'
     path_to_raw_tweet = '../../data_files/labelled_tweets/SA_1.5milliontweets/raw_tweets_SA.txt'
     path_to_emoticon_dictionary = '../emoticons/emo_dict.txt'
     path_to_slang_dictionary = '../slangs/SlangLookupTable.txt'
-    path_to_store_preprocessed_tweets = '../tweets/preprocessed_tweets_sts_gold.txt'
+    #path_to_store_preprocessed_tweets = '../tweets/preprocessed_tweets_SS_noneutral.txt'
     path_to_store_preprocessed_tweets = '../../data_files/labelled_tweets/SA_1.5milliontweets/prepocessed_tweets_SA.txt'
 
     tp = TweetPreprocessing()

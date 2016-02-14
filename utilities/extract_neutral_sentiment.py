@@ -146,13 +146,15 @@ if __name__ == '__main__':
     path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_neutral_polarity.txt'
     path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_noneutral_polarity.txt'
 
-    path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_sts_gold.txt'
-    path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_sts_gold.txt'
+    #path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_SS_noneutral.txt'
+    path_to_unprocessed_labelled_tweets = '../../data_files/labelled_tweets/SA_1.5milliontweets/labelled_tweets_SA.txt'
+    #path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_SS_noneutral.txt'
+    path_to_preprocessed_tweets = '../../data_files/labelled_tweets/SA_1.5milliontweets/preprocessed_tweets_SA.txt'
 
     path_to_store_labelled_noneutral_list = '../tweets/neutral/labelled_noneutral_sts_gold.txt'
 
     en = ExtractNeutralSentiment()
 
     #en.get_neutral_and_noneutral_tweets()
-    #en.get_labelled_preprocessed_tweets()
-    en.get_labelled_noneutral_tweets()
+    en.get_labelled_preprocessed_tweets()
+    #en.get_labelled_noneutral_tweets()
