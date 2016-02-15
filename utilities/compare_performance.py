@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 __author__ = 'yi-linghwong'
 
 import sys
@@ -43,14 +45,56 @@ class ComparePerformance():
 
         print(metrics.classification_report(gold_standard,to_compare))
         cm = metrics.confusion_matrix(gold_standard,to_compare)
-        print(cm)
+        print (cm)
+
+        # write gold standard to file
+
+        f = open(path_to_store_gold_standard,'w')
+
+        for gs in gold_standard:
+            f.write(gs+'\n')
+
+        f.close()
+
+        # write to compare list to file
+
+        f = open(path_to_store_to_compare,'w')
+
+        for tc in to_compare:
+            f.write(tc+'\n')
+
+        f.close()
+
 
 
 if __name__ == '__main__':
 
-    #path_to_gold_standard = '../tweets/labelled_tweets_sts_gold.txt'
-    path_to_gold_standard = '../../data_files/labelled_tweets/SA_1.5milliontweets/labelled_tweets_SA.txt'
-    path_to_file_to_compare = '../_SentiStrength/results/SA_tweets_senti_polarity.txt'
+    path_to_store_gold_standard = '../_combined/results/neutral/gold_standard.txt'
+    path_to_store_to_compare = '../_combined/results/neutral/to_compare.txt'
+
+    # from command line
+    path_to_gold_standard = sys.argv[1]
+    # 2 stage
+    #path_to_gold_standard = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
+    #path_to_gold_standard = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
+    # 3 stage
+    #path_to_gold_standard = '../tweets/neutral/emoticon_labelled_noneutral_SA.txt'
+    #path_to_gold_standard = '../tweets/neutral/bliu_labelled_noneutral_SA.txt'
+    #path_to_gold_standard = '../tweets/neutral/bliu_labelled_neutral_SA.txt'
+    # big file
+    #path_to_gold_standard = '../../data_files/labelled_tweets/SA_1.5milliontweets/labelled_tweets_SA.txt'
+
+    # from command line
+    path_to_file_to_compare = sys.argv[2]
+    # 2 stage
+    #path_to_file_to_compare = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
+    #path_to_file_to_compare = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
+    # 3 stage
+    #path_to_file_to_compare = '../_emoticon/results/neutral/SA_noneutral.txt'
+    #path_to_file_to_compare = '../_BLiu/results/neutral/SA_noneutral.txt'
+    #path_to_file_to_compare = '../_SentiStrength/results/neutral/SA_neutral_senti_polarity.txt'
+    # big file
+    #path_to_file_to_compare = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
 
 
     cp = ComparePerformance()

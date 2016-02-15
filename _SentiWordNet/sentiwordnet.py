@@ -147,7 +147,7 @@ class SentiWordNet():
 
         t2 = time.time()
 
-        total_time = (t2 - t1)/60
+        total_time = round(((t2 - t1) / 60),2)
 
         print ("Computing time was "+str(total_time)+" minutes.")
 
@@ -170,10 +170,11 @@ class SentiWordNet():
 
 if __name__ == "__main__":
 
-    path_to_processed_tweet_file = '../tweets/preprocessed_tweets_SS_noneutral.txt'
     path_to_sentiment_dictionary = 'dictionary/avg_no_neutral.txt'
-    path_to_store_results_score = 'results/SS_noneutral_tweets_senti_score.txt'
-    path_to_store_results_polarity = 'results/SS_noneutral_tweets_senti_polarity.txt'
+
+    path_to_processed_tweet_file = '../_BLiu/results/neutral/SA_neutral.txt'
+    path_to_store_results_score = 'results/neutral/SA_neutral_senti_score.txt'
+    path_to_store_results_polarity = 'results/neutral/SA_neutral_senti_polarity.txt'
 
     swn = SentiWordNet()
 

@@ -233,7 +233,7 @@ class SenticNet():
 
 		t2 = time.time()
 
-		total_time = (t2 - t1)/60
+		total_time = round(((t2 - t1) / 60),2)
 
 		print ("Computing time was "+str(total_time)+" minutes.")
 
@@ -259,11 +259,12 @@ class SenticNet():
 
 if __name__ == "__main__":
 
-	path_to_processed_tweet_file = '../tweets/preprocessed_tweets_SS_noneutral.txt'
 	path_to_concept_url_list = 'dictionary/concept_url.txt'
 	path_to_concept_list = 'dictionary/concepts.txt'
-	path_to_store_results_score = 'results/SS_noneutral_tweets_senti_score.txt'
-	path_to_store_results_polarity = 'results/SS_noneutral_tweets_senti_polarity.txt'
+
+	path_to_processed_tweet_file = '../_BLiu/results/neutral/sts_gold_neutral.txt'
+	path_to_store_results_score = 'results/neutral/sts_gold_neutral_senti_score.txt'
+	path_to_store_results_polarity = 'results/neutral/sts_gold_neutral_senti_polarity.txt'
 
 
 

@@ -354,12 +354,18 @@ class TweetPreprocessing():
 
 if __name__ == "__main__":
 
-    #path_to_raw_tweet = '../tweets/raw_tweets_SS_noneutral.txt'
-    path_to_raw_tweet = '../../data_files/labelled_tweets/SA_1.5milliontweets/raw_tweets_SA.txt'
+
     path_to_emoticon_dictionary = '../emoticons/emo_dict.txt'
     path_to_slang_dictionary = '../slangs/SlangLookupTable.txt'
-    #path_to_store_preprocessed_tweets = '../tweets/preprocessed_tweets_SS_noneutral.txt'
-    path_to_store_preprocessed_tweets = '../../data_files/labelled_tweets/SA_1.5milliontweets/prepocessed_tweets_SA.txt'
+
+
+    path_to_raw_tweet = '../tweets/raw_tweets_SA.txt'
+    #path_to_raw_tweet = '../../data_files/labelled_tweets/SA_1.5milliontweets/raw_tweets_SA.txt'
+    #path_to_raw_tweet = sys.argv[1]
+
+    path_to_store_preprocessed_tweets = '../tweets/preprocessed_tweets_SA.txt'
+    #path_to_store_preprocessed_tweets = '../../data_files/labelled_tweets/SA_1.5milliontweets/prepocessed_tweets_SA.txt'
+    #path_to_store_preprocessed_tweets = sys.argv[2]
 
     tp = TweetPreprocessing()
     #tp.remove_url_mention_hashtag()

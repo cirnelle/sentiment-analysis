@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 __author__ = 'yi-linghwong'
 
 ##################
@@ -203,7 +205,7 @@ class BLiu():
 
         t2 = time.time()
 
-        total_time = (t2 - t1) / 60
+        total_time = round(((t2 - t1) / 60),2)
 
         print("Computing time was " + str(total_time) + " minutes.")
 
@@ -225,10 +227,23 @@ class BLiu():
 
 
 if __name__ == "__main__":
-    path_to_processed_tweet_file = '../tweets/preprocessed_tweets_sts_gold.txt'
+
     path_to_sentiment_dictionary = 'dictionary/all_words.txt'
-    path_to_store_results_score = 'results/sts_gold_tweets_senti_score.txt'
-    path_to_store_results_polarity = 'results/sts_gold_tweets_senti_polarity.txt'
+
+    path_to_processed_tweet_file = sys.argv[1]
+    #path_to_processed_tweet_file = '../tweets/preprocessed_tweets_sts_gold.txt'
+    #path_to_processed_tweet_file = '../_emoticon/results/neutral/SA_neutral.txt'
+    #path_to_processed_tweet_file = '../../data_files/labelled_tweets/SA/preprocessed_tweets_SA.txt'
+
+    path_to_store_results_score = sys.argv[2]
+    #path_to_store_results_score = 'results/sts_gold_tweets_senti_score.txt'
+    #path_to_store_results_score = 'results/neutral/emoticon_SA_senti_score.txt'
+    #path_to_store_results_score = '../../data_files/labelled_tweets/SA/BLiu_results/SA_tweets_senti_score.txt'
+
+    path_to_store_results_polarity = sys.argv[3]
+    #path_to_store_results_polarity = 'results/sts_gold_tweets_senti_polarity.txt'
+    #path_to_store_results_polarity = 'results/neutral/emoticon_SA_senti_polarity.txt'
+    #path_to_store_results_polarity = '../../data_files/labelled_tweets/SA/BLiu_results/SA_tweets_senti_polarity.txt'
 
     bl = BLiu()
 

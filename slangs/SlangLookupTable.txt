@@ -1,12 +1,12 @@
 121	one to one
 2moro	tomorrow
 2nite	tonight
-a/s/l	age, sex, location
+a/s/l	age sex location
 afaik	as far as I know
 afaicr	as far as I can remember
 afair	as far as I remember
 asap	as soon as possible
-asl	age, sex, location
+asl	age sex location
 adn	any day now
 afaik	as far as I know
 afk	away from keyboard
@@ -54,7 +54,7 @@ foaf	friend of a friend
 ftr	for the record
 ftw	for the win
 fu	fuck you
-fud	fear, uncertainty, and doubt
+fud	fear uncertainty and doubt
 fwiw	for what it's worth
 fyi	for your information
 g2g	got to go
@@ -95,7 +95,7 @@ jk	just kidding
 k	okay 
 l8	late
 l8r	later
-ld	later, dude
+ld	later dude
 ldr	long distance relationship
 llta	lots and lots of thunderous applause
 lmao	laugh my ass off

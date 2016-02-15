@@ -297,7 +297,7 @@ if __name__ == '__main__':
     path_to_store_raw_tweets_sts_gold = '../tweets/raw_tweets_sts_gold.txt'
     path_to_store_labelled_tweets_sts_gold = '../tweets/labelled_tweets_sts_gold.txt'
 
-    path_to_labelled_tweet_file_SA = '../../data_files/labelled_tweets/Sentiment_Analysis_Dataset.csv'
+    path_to_labelled_tweet_file_SA = '../../data_files/labelled_tweets/SA/Sentiment_Analysis_Dataset_small.csv'
     path_to_store_raw_tweets_SA = '../tweets/raw_tweets_SA.txt'
     path_to_store_labelled_tweets_SA = '../tweets/labelled_tweets_SA.txt'
 
@@ -321,12 +321,12 @@ if __name__ == '__main__':
     #############
 
     #pt.create_raw_tweet_SA()
-    #pt.convert_labels_SA()
+    pt.convert_labels_SA()
 
 
     #############
     # for SentiStrength dataset
     #############
 
-    pt.create_raw_tweet_SS()
+    #pt.create_raw_tweet_SS()
     #pt.convert_labels_SS()

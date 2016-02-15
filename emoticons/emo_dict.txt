@@ -639,7 +639,7 @@
 :*p	playful
 :*P	playful
 :*/	uneasy
-:*:	kiss
+:*:	sift
 :*}	happy
 :*{	sad
 :*@	angry
@@ -1583,7 +1583,6 @@ D*:	surprised
 p*:	playful
 P*:	playful
 /*:	uneasy
-:*:	sift
 }*:	sad
 {*:	happy
 @*:	angry
@@ -1944,7 +1943,6 @@ P8	playful
 8'0	surprised
 :0	surprised
 ;0	surprised
-=0	surprised
 :-O	surprised
 ;-O	surprised
 =-O	surprised
@@ -1963,7 +1961,6 @@ P8	playful
 8'O	surprised
 :O	surprised
 ;O	surprised
-=0	surprised
 ^^	grinning
 ^.^	grinning
 ^_^	grinning
@@ -1988,7 +1985,6 @@ x-p	playful
 --^--@	happy	
 0:)	happy
 38*	disapproval
-8\	confused
 8c	surprised
 :#	confused	
 :'-(	sad
@@ -2034,3 +2030,7 @@ x3?	grinning
 |8c	surprised
 |D	happy	
 }:)	happy
+:$	confused
+:-$	confused
+$:	confused
+$-:	confused

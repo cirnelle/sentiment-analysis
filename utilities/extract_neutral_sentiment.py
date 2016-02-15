@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 __author__ = 'yi-linghwong'
 
 ###############
@@ -7,6 +9,7 @@ __author__ = 'yi-linghwong'
 
 import sys
 import os
+import time
 
 class ExtractNeutralSentiment():
 
@@ -37,13 +40,15 @@ class ExtractNeutralSentiment():
                 noneutral_full.append(r)
 
             elif r[0] == 'neutral':
+                # remove blank space from front and end of tweet
+                r[1] = r[1][1:-1]
                 neutral.append(r[1])
 
             else:
                 print ("error")
 
-        print ("Length of neutral list is "+str(len(neutral)))
         print ("Length of noneutral list is "+str(len(noneutral)))
+        print ("Length of neutral list is "+str(len(neutral)))
 
         f = open(path_to_store_noneutral_file_lexicon,'w')
 
@@ -59,7 +64,7 @@ class ExtractNeutralSentiment():
 
         f.close()
 
-        return noneutral
+        return noneutral,noneutral_full
 
     def get_labelled_preprocessed_tweets(self):
 
@@ -116,11 +121,22 @@ class ExtractNeutralSentiment():
     ###############
 
         labelled = self.get_labelled_preprocessed_tweets() # [['neg','this is a tweet'],['pos,'this is a second tweet']]
-        noneutral = self.get_neutral_and_noneutral_tweets() # [' this is a tweet ', ' this is another tweet ']
+        noneutral = self.get_neutral_and_noneutral_tweets()[0] # [' this is a tweet ', ' this is another tweet ']
+        noneutral_full = self.get_neutral_and_noneutral_tweets()[1]
 
         labelled_noneutral = []
+        labelled_neutral = []
+        labelled_noneutral_tweet = []
 
         # remove neutral from labelled list
+
+        print (labelled[:1])
+        print (noneutral[:1])
+        print (noneutral_full[:1])
+
+        print ("Extracting neutral and noneutral overlap...")
+
+        t1 = time.time()
 
         for l in labelled:
             # need to add space to front and back because we added space to the tweets in lexicon analysis
@@ -128,8 +144,35 @@ class ExtractNeutralSentiment():
 
             if l[1] in noneutral:
                 labelled_noneutral.append(l)
+                labelled_noneutral_tweet.append(l[1])
+            else:
+                labelled_neutral.append(l)
+
+        t2 = time.time()
+
+        total_time = round(((t2 - t1) / 60),2)
+
+        print ("Computing time was "+str(total_time)+" minutes.")
 
         print ("Length of labelled noneutral list is "+str(len(labelled_noneutral)))
+        print ("Length of labelled neutral list is "+str(len(labelled_neutral)))
+
+        ##############
+        # Check if length of two lists are equal and print the missing tweet
+        ##############
+
+
+        if len(labelled_noneutral) != len(noneutral_full):
+            print ("Length not equal")
+
+            temp = []
+
+            for nf in noneutral_full:
+                if nf[1] not in labelled_noneutral_tweet:
+                    temp.append(nf[1])
+
+            print (len(temp))
+            print ("Missing tweets are "+str(temp))
 
         f = open(path_to_store_labelled_noneutral_list,'w')
 
@@ -138,23 +181,70 @@ class ExtractNeutralSentiment():
 
         f.close()
 
+        f = open(path_to_store_labelled_neutral_list,'w')
+
+        for ln in labelled_neutral:
+            f.write(','.join(ln)+'\n')
+
+        f.close()
+
         return labelled_noneutral
 
 if __name__ == '__main__':
 
-    path_to_sentiment_result_file = '../_BLiu/results/sts_gold_tweets_senti_polarity.txt'
-    path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_neutral_polarity.txt'
-    path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_noneutral_polarity.txt'
+    # command line
+    path_to_sentiment_result_file = sys.argv[1]
+    path_to_store_only_neutral_file_lexicon = sys.argv[2]
+    path_to_store_noneutral_file_lexicon = sys.argv[3]
+    # 2 stage
+    #path_to_sentiment_result_file = '../_BLiu/results/sts_gold_tweets_senti_polarity.txt'
+    #path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_neutral.txt'
+    #path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
+    # 3 stage
+    #path_to_sentiment_result_file = '../_emoticon/results/SA_tweets_senti_polarity.txt'
+    #path_to_store_only_neutral_file_lexicon = '../_emoticon/results/neutral/SA_neutral.txt'
+    #path_to_store_noneutral_file_lexicon = '../_emoticon/results/neutral/SA_noneutral.txt'
+    #path_to_sentiment_result_file = '../_BLiu/results/neutral/emoticon_SA_senti_polarity.txt'
+    #path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/SA_neutral.txt'
+    #path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/SA_noneutral.txt'
+    # big file
+    #path_to_sentiment_result_file = '../../data_files/labelled_tweets/SA/BLiu_results/SA_tweets_senti_polarity.txt'
+    #path_to_store_only_neutral_file_lexicon = '../../data_files/labelled_tweets/SA/BLiu_results/neutral/SA_neutral.txt'
+    #path_to_store_noneutral_file_lexicon = '../../data_files/labelled_tweets/SA/BLiu_results/neutral/SA_noneutral.txt'
 
-    #path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_SS_noneutral.txt'
-    path_to_unprocessed_labelled_tweets = '../../data_files/labelled_tweets/SA_1.5milliontweets/labelled_tweets_SA.txt'
-    #path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_SS_noneutral.txt'
-    path_to_preprocessed_tweets = '../../data_files/labelled_tweets/SA_1.5milliontweets/preprocessed_tweets_SA.txt'
+    # command line
+    path_to_unprocessed_labelled_tweets = sys.argv[4]
+    path_to_preprocessed_tweets = sys.argv[5]
+    # 2 stage
+    #path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_sts_gold.txt'
+    #path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_sts_gold.txt'
+    # 3 stage
+    #path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_SA.txt'
+    #path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_SA.txt'
+    #path_to_unprocessed_labelled_tweets = '../tweets/neutral/emoticon_labelled_neutral_SA.txt'
+    #path_to_preprocessed_tweets = '../_emoticon/results/neutral/SA_neutral.txt'
+    # big file
+    #path_to_unprocessed_labelled_tweets = '../../data_files/labelled_tweets/SA/labelled_tweets_SA.txt'
+    #path_to_preprocessed_tweets = '../../data_files/labelled_tweets/SA/preprocessed_tweets_SA.txt'
 
-    path_to_store_labelled_noneutral_list = '../tweets/neutral/labelled_noneutral_sts_gold.txt'
+    # command line
+    path_to_store_labelled_noneutral_list = sys.argv[6]
+    path_to_store_labelled_neutral_list = sys.argv[7]
+    # 2 stage
+    #path_to_store_labelled_noneutral_list = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
+    #path_to_store_labelled_neutral_list = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
+    # 3 stage
+    #path_to_store_labelled_noneutral_list = '../tweets/neutral/emoticon_labelled_noneutral_SA.txt'
+    #path_to_store_labelled_neutral_list = '../tweets/neutral/emoticon_labelled_neutral_SA.txt'
+    #path_to_store_labelled_noneutral_list = '../tweets/neutral/bliu_labelled_noneutral_SA.txt'
+    #path_to_store_labelled_neutral_list = '../tweets/neutral/bliu_labelled_neutral_SA.txt'
+    # big file
+    #path_to_store_labelled_noneutral_list = '../../data_files/labelled_tweets/SA/neutral/labelled_noneutral_SA.txt'
+    #path_to_store_labelled_neutral_list = '../../data_files/labelled_tweets/SA/neutral/labelled_neutral_SA.txt'
+
 
     en = ExtractNeutralSentiment()
 
     #en.get_neutral_and_noneutral_tweets()
-    en.get_labelled_preprocessed_tweets()
-    #en.get_labelled_noneutral_tweets()
+    #en.get_labelled_preprocessed_tweets()
+    en.get_labelled_noneutral_tweets()
