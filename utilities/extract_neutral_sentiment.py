@@ -190,58 +190,63 @@ class ExtractNeutralSentiment():
 
         return labelled_noneutral
 
+
+#################
+# variables
+#################
+
+# command line
+path_to_sentiment_result_file = sys.argv[1]
+path_to_store_only_neutral_file_lexicon = sys.argv[2]
+path_to_store_noneutral_file_lexicon = sys.argv[3]
+# 2 stage
+#path_to_sentiment_result_file = '../_BLiu/results/sts_gold_tweets_senti_polarity.txt'
+#path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_neutral.txt'
+#path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
+# 3 stage
+#path_to_sentiment_result_file = '../_emoticon/results/SA_tweets_senti_polarity.txt'
+#path_to_store_only_neutral_file_lexicon = '../_emoticon/results/neutral/SA_neutral.txt'
+#path_to_store_noneutral_file_lexicon = '../_emoticon/results/neutral/SA_noneutral.txt'
+#path_to_sentiment_result_file = '../_BLiu/results/neutral/emoticon_SA_senti_polarity.txt'
+#path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/SA_neutral.txt'
+#path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/SA_noneutral.txt'
+# big file
+#path_to_sentiment_result_file = '../../data_files/labelled_tweets/SA/BLiu_results/SA_tweets_senti_polarity.txt'
+#path_to_store_only_neutral_file_lexicon = '../../data_files/labelled_tweets/SA/BLiu_results/neutral/SA_neutral.txt'
+#path_to_store_noneutral_file_lexicon = '../../data_files/labelled_tweets/SA/BLiu_results/neutral/SA_noneutral.txt'
+
+# command line
+path_to_unprocessed_labelled_tweets = sys.argv[4]
+path_to_preprocessed_tweets = sys.argv[5]
+# 2 stage
+#path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_sts_gold.txt'
+#path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_sts_gold.txt'
+# 3 stage
+#path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_SA.txt'
+#path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_SA.txt'
+#path_to_unprocessed_labelled_tweets = '../tweets/neutral/emoticon_labelled_neutral_SA.txt'
+#path_to_preprocessed_tweets = '../_emoticon/results/neutral/SA_neutral.txt'
+# big file
+#path_to_unprocessed_labelled_tweets = '../../data_files/labelled_tweets/SA/labelled_tweets_SA.txt'
+#path_to_preprocessed_tweets = '../../data_files/labelled_tweets/SA/preprocessed_tweets_SA.txt'
+
+# command line
+path_to_store_labelled_noneutral_list = sys.argv[6]
+path_to_store_labelled_neutral_list = sys.argv[7]
+# 2 stage
+#path_to_store_labelled_noneutral_list = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
+#path_to_store_labelled_neutral_list = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
+# 3 stage
+#path_to_store_labelled_noneutral_list = '../tweets/neutral/emoticon_labelled_noneutral_SA.txt'
+#path_to_store_labelled_neutral_list = '../tweets/neutral/emoticon_labelled_neutral_SA.txt'
+#path_to_store_labelled_noneutral_list = '../tweets/neutral/bliu_labelled_noneutral_SA.txt'
+#path_to_store_labelled_neutral_list = '../tweets/neutral/bliu_labelled_neutral_SA.txt'
+# big file
+#path_to_store_labelled_noneutral_list = '../../data_files/labelled_tweets/SA/neutral/labelled_noneutral_SA.txt'
+#path_to_store_labelled_neutral_list = '../../data_files/labelled_tweets/SA/neutral/labelled_neutral_SA.txt'
+
+
 if __name__ == '__main__':
-
-    # command line
-    path_to_sentiment_result_file = sys.argv[1]
-    path_to_store_only_neutral_file_lexicon = sys.argv[2]
-    path_to_store_noneutral_file_lexicon = sys.argv[3]
-    # 2 stage
-    #path_to_sentiment_result_file = '../_BLiu/results/sts_gold_tweets_senti_polarity.txt'
-    #path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_neutral.txt'
-    #path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
-    # 3 stage
-    #path_to_sentiment_result_file = '../_emoticon/results/SA_tweets_senti_polarity.txt'
-    #path_to_store_only_neutral_file_lexicon = '../_emoticon/results/neutral/SA_neutral.txt'
-    #path_to_store_noneutral_file_lexicon = '../_emoticon/results/neutral/SA_noneutral.txt'
-    #path_to_sentiment_result_file = '../_BLiu/results/neutral/emoticon_SA_senti_polarity.txt'
-    #path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/SA_neutral.txt'
-    #path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/SA_noneutral.txt'
-    # big file
-    #path_to_sentiment_result_file = '../../data_files/labelled_tweets/SA/BLiu_results/SA_tweets_senti_polarity.txt'
-    #path_to_store_only_neutral_file_lexicon = '../../data_files/labelled_tweets/SA/BLiu_results/neutral/SA_neutral.txt'
-    #path_to_store_noneutral_file_lexicon = '../../data_files/labelled_tweets/SA/BLiu_results/neutral/SA_noneutral.txt'
-
-    # command line
-    path_to_unprocessed_labelled_tweets = sys.argv[4]
-    path_to_preprocessed_tweets = sys.argv[5]
-    # 2 stage
-    #path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_sts_gold.txt'
-    #path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_sts_gold.txt'
-    # 3 stage
-    #path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_SA.txt'
-    #path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_SA.txt'
-    #path_to_unprocessed_labelled_tweets = '../tweets/neutral/emoticon_labelled_neutral_SA.txt'
-    #path_to_preprocessed_tweets = '../_emoticon/results/neutral/SA_neutral.txt'
-    # big file
-    #path_to_unprocessed_labelled_tweets = '../../data_files/labelled_tweets/SA/labelled_tweets_SA.txt'
-    #path_to_preprocessed_tweets = '../../data_files/labelled_tweets/SA/preprocessed_tweets_SA.txt'
-
-    # command line
-    path_to_store_labelled_noneutral_list = sys.argv[6]
-    path_to_store_labelled_neutral_list = sys.argv[7]
-    # 2 stage
-    #path_to_store_labelled_noneutral_list = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
-    #path_to_store_labelled_neutral_list = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
-    # 3 stage
-    #path_to_store_labelled_noneutral_list = '../tweets/neutral/emoticon_labelled_noneutral_SA.txt'
-    #path_to_store_labelled_neutral_list = '../tweets/neutral/emoticon_labelled_neutral_SA.txt'
-    #path_to_store_labelled_noneutral_list = '../tweets/neutral/bliu_labelled_noneutral_SA.txt'
-    #path_to_store_labelled_neutral_list = '../tweets/neutral/bliu_labelled_neutral_SA.txt'
-    # big file
-    #path_to_store_labelled_noneutral_list = '../../data_files/labelled_tweets/SA/neutral/labelled_noneutral_SA.txt'
-    #path_to_store_labelled_neutral_list = '../../data_files/labelled_tweets/SA/neutral/labelled_neutral_SA.txt'
-
 
     en = ExtractNeutralSentiment()
 

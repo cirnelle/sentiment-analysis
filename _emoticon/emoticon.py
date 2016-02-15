@@ -236,16 +236,21 @@ class Emoticon():
 
         return tweet_score_list
 
+
+###############
+# variables
+###############
+
+path_to_emoticon_dict = '../emoticons/emo_dict.txt'
+path_to_emoticon_score = '../emoticons/emoticon_score.txt'
+
+path_to_raw_tweets = '../tweets/raw_tweets_SA.txt' #use raw tweets!
+path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_SA.txt'
+path_to_store_results_score = 'results/SA_tweets_senti_score.txt'
+path_to_store_results_polarity = 'results/SA_tweets_senti_polarity.txt'
+
+
 if __name__ == '__main__':
-
-    path_to_emoticon_dict = '../emoticons/emo_dict.txt'
-    path_to_emoticon_score = '../emoticons/emoticon_score.txt'
-
-    path_to_raw_tweets = '../tweets/raw_tweets_SA.txt' #use raw tweets!
-    path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_SA.txt'
-    path_to_store_results_score = 'results/SA_tweets_senti_score.txt'
-    path_to_store_results_polarity = 'results/SA_tweets_senti_polarity.txt'
-
 
     em = Emoticon()
     #em.sync_emo_dict_emo_score()

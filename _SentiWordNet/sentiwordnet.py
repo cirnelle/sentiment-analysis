@@ -168,20 +168,22 @@ class SentiWordNet():
         return tweet_score_list
 
 
+###############
+# variables
+###############
+
+path_to_sentiment_dictionary = 'dictionary/avg_no_neutral.txt'
+
+path_to_processed_tweet_file = '../_BLiu/results/neutral/SA_neutral.txt'
+path_to_store_results_score = 'results/neutral/SA_neutral_senti_score.txt'
+path_to_store_results_polarity = 'results/neutral/SA_neutral_senti_polarity.txt'
+
+
 if __name__ == "__main__":
 
-    path_to_sentiment_dictionary = 'dictionary/avg_no_neutral.txt'
-
-    path_to_processed_tweet_file = '../_BLiu/results/neutral/SA_neutral.txt'
-    path_to_store_results_score = 'results/neutral/SA_neutral_senti_score.txt'
-    path_to_store_results_polarity = 'results/neutral/SA_neutral_senti_polarity.txt'
 
     swn = SentiWordNet()
-
     #swn.create_senti_dict()
-
     #swn.create_tweet_list()
-
     #swn.create_ngram_list()
-
     swn.calculate_senti_score()

@@ -290,21 +290,24 @@ class ProcessLabelledTweets():
         return tweet_sentiment_list
 
 
+################
+# variables
+################
+
+path_to_labelled_tweet_file_sts_gold = '../../data_files/labelled_tweets/sts_gold_v03/sts_gold_tweet.csv'
+path_to_store_raw_tweets_sts_gold = '../tweets/raw_tweets_sts_gold.txt'
+path_to_store_labelled_tweets_sts_gold = '../tweets/labelled_tweets_sts_gold.txt'
+
+path_to_labelled_tweet_file_SA = '../../data_files/labelled_tweets/SA/Sentiment_Analysis_Dataset_small.csv'
+path_to_store_raw_tweets_SA = '../tweets/raw_tweets_SA.txt'
+path_to_store_labelled_tweets_SA = '../tweets/labelled_tweets_SA.txt'
+
+path_to_labelled_tweet_file_SS = '../../data_files/labelled_tweets/SentiStrength/twitter4242.txt'
+#path_to_labelled_tweet_file_SS = 'test.txt'
+path_to_store_raw_tweets_SS = '../tweets/raw_tweets_SS_noneutral.txt'
+path_to_store_labelled_tweets_SS = '../tweets/labelled_tweets_SS_noneutral.txt'
 
 if __name__ == '__main__':
-
-    path_to_labelled_tweet_file_sts_gold = '../../data_files/labelled_tweets/sts_gold_v03/sts_gold_tweet.csv'
-    path_to_store_raw_tweets_sts_gold = '../tweets/raw_tweets_sts_gold.txt'
-    path_to_store_labelled_tweets_sts_gold = '../tweets/labelled_tweets_sts_gold.txt'
-
-    path_to_labelled_tweet_file_SA = '../../data_files/labelled_tweets/SA/Sentiment_Analysis_Dataset_small.csv'
-    path_to_store_raw_tweets_SA = '../tweets/raw_tweets_SA.txt'
-    path_to_store_labelled_tweets_SA = '../tweets/labelled_tweets_SA.txt'
-
-    path_to_labelled_tweet_file_SS = '../../data_files/labelled_tweets/SentiStrength/twitter4242.txt'
-    #path_to_labelled_tweet_file_SS = 'test.txt'
-    path_to_store_raw_tweets_SS = '../tweets/raw_tweets_SS_noneutral.txt'
-    path_to_store_labelled_tweets_SS = '../tweets/labelled_tweets_SS_noneutral.txt'
 
     pt = ProcessLabelledTweets()
 

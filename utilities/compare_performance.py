@@ -38,7 +38,7 @@ class ComparePerformance():
 
         print (len(not_equal))
 
-        performance = ((len(gold_standard)-len(not_equal)) / len(gold_standard)) *100
+        performance = round((((len(gold_standard)-len(not_equal)) / len(gold_standard)) *100),2)
 
         print ("Overall accuracy is "+str(performance)+"%")
 
@@ -65,38 +65,45 @@ class ComparePerformance():
 
         f.close()
 
+        return
+
+##############
+# variables
+##############
+
+path_to_store_gold_standard = '../_combined/results/neutral/gold_standard.txt'
+path_to_store_to_compare = '../_combined/results/neutral/to_compare.txt'
+
+# command line
+path_to_gold_standard = sys.argv[1]
+# 2 stage
+#path_to_gold_standard = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
+#path_to_gold_standard = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
+# 3 stage
+#path_to_gold_standard = '../tweets/neutral/emoticon_labelled_noneutral_SA.txt'
+#path_to_gold_standard = '../tweets/neutral/bliu_labelled_noneutral_SA.txt'
+#path_to_gold_standard = '../tweets/neutral/bliu_labelled_neutral_SA.txt'
+# big file
+#path_to_gold_standard = '../../data_files/labelled_tweets/SA_1.5milliontweets/labelled_tweets_SA.txt'
+
+# command line
+path_to_file_to_compare = sys.argv[2]
+# 2 stage
+#path_to_file_to_compare = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
+#path_to_file_to_compare = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
+# 3 stage
+#path_to_file_to_compare = '../_emoticon/results/neutral/SA_noneutral.txt'
+#path_to_file_to_compare = '../_BLiu/results/neutral/SA_noneutral.txt'
+#path_to_file_to_compare = '../_SentiStrength/results/neutral/SA_neutral_senti_polarity.txt'
+# big file
+#path_to_file_to_compare = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
 
 
 if __name__ == '__main__':
 
-    path_to_store_gold_standard = '../_combined/results/neutral/gold_standard.txt'
-    path_to_store_to_compare = '../_combined/results/neutral/to_compare.txt'
-
-    # from command line
-    path_to_gold_standard = sys.argv[1]
-    # 2 stage
-    #path_to_gold_standard = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
-    #path_to_gold_standard = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
-    # 3 stage
-    #path_to_gold_standard = '../tweets/neutral/emoticon_labelled_noneutral_SA.txt'
-    #path_to_gold_standard = '../tweets/neutral/bliu_labelled_noneutral_SA.txt'
-    #path_to_gold_standard = '../tweets/neutral/bliu_labelled_neutral_SA.txt'
-    # big file
-    #path_to_gold_standard = '../../data_files/labelled_tweets/SA_1.5milliontweets/labelled_tweets_SA.txt'
-
-    # from command line
-    path_to_file_to_compare = sys.argv[2]
-    # 2 stage
-    #path_to_file_to_compare = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
-    #path_to_file_to_compare = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
-    # 3 stage
-    #path_to_file_to_compare = '../_emoticon/results/neutral/SA_noneutral.txt'
-    #path_to_file_to_compare = '../_BLiu/results/neutral/SA_noneutral.txt'
-    #path_to_file_to_compare = '../_SentiStrength/results/neutral/SA_neutral_senti_polarity.txt'
-    # big file
-    #path_to_file_to_compare = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
-
-
     cp = ComparePerformance()
     cp.calculate_performance()
+
+
+
 

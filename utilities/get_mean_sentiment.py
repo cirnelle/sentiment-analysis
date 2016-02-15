@@ -140,18 +140,21 @@ class GetMeanSentiment():
         f.close()
 
 
+################
+# variables
+################
+
+#path_to_sentiment_sentistrength = '../../data_files/labelled_tweets/SA_1.5milliontweets/SentiStrength_results/SA_tweets_senti_polarity.txt'
+#path_to_sentiment_sentiwordnet = '../../data_files/labelled_tweets/SA_1.5milliontweets/SentiWordNet_results/SA_tweets_senti_polarity.txt'
+#path_to_sentiment_senticnet = '../../data_files/labelled_tweets/SA_1.5milliontweets/SenticNet_results/SA_tweets_senti_polarity.txt'
+path_to_sentiment_sentistrength = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
+path_to_sentiment_sentiwordnet = '../_SentiWordNet/results/neutral/sts_gold_neutral_senti_polarity.txt'
+path_to_sentiment_senticnet = '../_SenticNet/results/neutral/sts_gold_neutral_senti_polarity.txt'
+
+path_to_store_tweet_list_with_mean_sentiment = '../_combined/neutral/sts_gold_neutral_senti_polarity.txt'
 
 
 if __name__ == '__main__':
-
-    #path_to_sentiment_sentistrength = '../../data_files/labelled_tweets/SA_1.5milliontweets/SentiStrength_results/SA_tweets_senti_polarity.txt'
-    #path_to_sentiment_sentiwordnet = '../../data_files/labelled_tweets/SA_1.5milliontweets/SentiWordNet_results/SA_tweets_senti_polarity.txt'
-    #path_to_sentiment_senticnet = '../../data_files/labelled_tweets/SA_1.5milliontweets/SenticNet_results/SA_tweets_senti_polarity.txt'
-    path_to_sentiment_sentistrength = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
-    path_to_sentiment_sentiwordnet = '../_SentiWordNet/results/neutral/sts_gold_neutral_senti_polarity.txt'
-    path_to_sentiment_senticnet = '../_SenticNet/results/neutral/sts_gold_neutral_senti_polarity.txt'
-
-    path_to_store_tweet_list_with_mean_sentiment = '../_combined/neutral/sts_gold_neutral_senti_polarity.txt'
 
     ms = GetMeanSentiment()
     #ms.get_sentiments_from_methods()

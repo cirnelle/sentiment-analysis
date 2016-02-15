@@ -12,20 +12,17 @@ import sys
 from sklearn import metrics
 
 
-sys.path.append('/Users/yi-linghwong/GitHub/sentiment-analysis/utilities/')
-from compare_performance import ComparePerformance
-
-
-
-
+#sys.path.append('/Users/yi-linghwong/GitHub/sentiment-analysis/utilities/')
+#from compare_performance import ComparePerformance
 
 #cp = ComparePerformance()
 #os.chdir('/Users/yi-linghwong/GitHub/sentiment-analysis/utilities/')
-#os.system("/Users/yi-linghwong/GitHub/sentiment-analysis/utilities/compare_performance.py '../tweets/neutral/bliu_labelled_noneutral_SA.txt' '../_BLiu/results/neutral/SA_noneutral.txt'")
 
-#os.system("rsync -rq /Users/yi-linghwong/GitHub/ yiling@119.81.12.92:./GitHub/GitHub")
 
 class Combined():
+
+    def __init__(self):
+        print ("Running piping script ...")
 
     def run_bliu(self):
 
@@ -136,7 +133,7 @@ class Combined():
 
         not_equal = [(i,j) for i,j in zip(gold_standard_all,to_compare_all) if i!=j]
 
-        performance = ((len(gold_standard_all)-len(not_equal)) / len(gold_standard_all)) *100
+        performance = round((((len(gold_standard_all)-len(not_equal)) / len(gold_standard_all)) *100),2)
 
         print ("Overall accuracy is "+str(performance)+"%")
 
@@ -145,43 +142,44 @@ class Combined():
         cm = metrics.confusion_matrix(gold_standard_all,to_compare_all)
         print (cm)
 
+###############
+# variables
+###############
 
+
+# bliu.py
+bliu_path_to_processed_tweet_file = '../tweets/preprocessed_tweets_sts_gold.txt'
+bliu_path_to_store_results_score = 'results/sts_gold_tweets_senti_score.txt'
+bliu_path_to_store_results_polarity = 'results/sts_gold_tweets_senti_polarity.txt'
+
+# extract_neutral_sentiment.py
+path_to_sentiment_result_file = '../_BLiu/results/sts_gold_tweets_senti_polarity.txt'
+path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_neutral.txt'
+path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
+
+path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_sts_gold.txt'
+path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_sts_gold.txt'
+
+path_to_store_labelled_noneutral_list = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
+path_to_store_labelled_neutral_list = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
+
+# compare_performance.py - 1
+bliu_path_to_gold_standard = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
+bliu_path_to_file_to_compare = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
+
+# sentistrength.py
+ss_path_to_tweet_file = '../_BLiu/results/neutral/sts_gold_neutral.txt'
+ss_path_to_output_folder = 'results/neutral/'
+ss_option = 'trinary'
+ss_path_to_tweet_score_file = 'results/neutral/sts_gold_neutral0_out.txt'
+ss_path_to_store_labelled_tweets = 'results/neutral/sts_gold_neutral_senti_polarity.txt'
+
+# compare_performance.py - 2
+ss_path_to_gold_standard = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
+ss_path_to_file_to_compare = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
 
 
 if __name__ == '__main__':
-
-    # bliu.py
-    bliu_path_to_processed_tweet_file = '../tweets/preprocessed_tweets_sts_gold.txt'
-    bliu_path_to_store_results_score = 'results/sts_gold_tweets_senti_score.txt'
-    bliu_path_to_store_results_polarity = 'results/sts_gold_tweets_senti_polarity.txt'
-
-    # extract_neutral_sentiment.py
-    path_to_sentiment_result_file = '../_BLiu/results/sts_gold_tweets_senti_polarity.txt'
-    path_to_store_only_neutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_neutral.txt'
-    path_to_store_noneutral_file_lexicon = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
-
-    path_to_unprocessed_labelled_tweets = '../tweets/labelled_tweets_sts_gold.txt'
-    path_to_preprocessed_tweets = '../tweets/preprocessed_tweets_sts_gold.txt'
-
-    path_to_store_labelled_noneutral_list = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
-    path_to_store_labelled_neutral_list = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
-
-    # compare_performance.py - 1
-    bliu_path_to_gold_standard = '../tweets/neutral/bliu_labelled_noneutral_sts_gold.txt'
-    bliu_path_to_file_to_compare = '../_BLiu/results/neutral/sts_gold_noneutral.txt'
-
-    # sentistrength.py
-    ss_path_to_tweet_file = '../_BLiu/results/neutral/sts_gold_neutral.txt'
-    ss_path_to_output_folder = 'results/neutral/'
-    ss_option = 'trinary'
-    ss_path_to_tweet_score_file = 'results/neutral/sts_gold_neutral0_out.txt'
-    ss_path_to_store_labelled_tweets = 'results/neutral/sts_gold_neutral_senti_polarity.txt'
-
-    # compare_performance.py - 2
-    ss_path_to_gold_standard = '../tweets/neutral/bliu_labelled_neutral_sts_gold.txt'
-    ss_path_to_file_to_compare = '../_SentiStrength/results/neutral/sts_gold_neutral_senti_polarity.txt'
-
-
 
     cb = Combined()
     #cb.run_bliu()

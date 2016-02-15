@@ -256,17 +256,18 @@ class SenticNet():
 		return tweet_score_list
 
 
+################
+# variables
+################
+
+path_to_concept_url_list = 'dictionary/concept_url.txt'
+path_to_concept_list = 'dictionary/concepts.txt'
+
+path_to_processed_tweet_file = '../_BLiu/results/neutral/sts_gold_neutral.txt'
+path_to_store_results_score = 'results/neutral/sts_gold_neutral_senti_score.txt'
+path_to_store_results_polarity = 'results/neutral/sts_gold_neutral_senti_polarity.txt'
 
 if __name__ == "__main__":
-
-	path_to_concept_url_list = 'dictionary/concept_url.txt'
-	path_to_concept_list = 'dictionary/concepts.txt'
-
-	path_to_processed_tweet_file = '../_BLiu/results/neutral/sts_gold_neutral.txt'
-	path_to_store_results_score = 'results/neutral/sts_gold_neutral_senti_score.txt'
-	path_to_store_results_polarity = 'results/neutral/sts_gold_neutral_senti_polarity.txt'
-
-
 
 	sn = SenticNet()
 	#sn.create_concept_list()

@@ -265,7 +265,11 @@ class SentiWordNetList():
 
         return without_neutral
 
+############
+# variables
+###########
 
+path_to_term_file = 'dictionary/SentiWordNet_INPUT.txt'
 
 
 if __name__ == "__main__":
@@ -275,8 +279,6 @@ if __name__ == "__main__":
     #####################
     # Run code from IDE #
     #####################
-
-    path_to_term_file = 'dictionary/SentiWordNet_INPUT.txt'
 
     ############
     # Create list with top sense

@@ -105,30 +105,32 @@ class SentiStrength():
 
         f.close()
 
+##############
+# variables
+##############
 
+path_to_tweet_file = sys.argv[1]
+#path_to_tweet_file = '../_BLiu/results/neutral/sts_gold_neutral.txt'
+
+path_to_output_folder = sys.argv[2]
+#path_to_output_folder = 'results/neutral/'
+#path_to_output_folder = 'results/'
+
+option = sys.argv[3]
+#option = 'trinary'  #trinary (report positive-negative-neutral classifcation instead)
+                    #binary (report positive-negative classifcation instead)
+                    #scale (report single -4 to +4 classifcation instead)
+
+
+path_to_tweet_score_file = sys.argv[4]
+#path_to_tweet_score_file = 'results/neutral/sts_gold_neutral0_out.txt'
+
+path_to_store_labelled_tweets = sys.argv[5]
+#path_to_store_labelled_tweets = 'results/neutral/sts_gold_neutral_senti_polarity.txt'
 
 
 
 if __name__ == "__main__":
-
-    path_to_tweet_file = sys.argv[1]
-    #path_to_tweet_file = '../_BLiu/results/neutral/sts_gold_neutral.txt'
-
-    path_to_output_folder = sys.argv[2]
-    #path_to_output_folder = 'results/neutral/'
-    #path_to_output_folder = 'results/'
-
-    option = sys.argv[3]
-    #option = 'trinary'  #trinary (report positive-negative-neutral classifcation instead)
-                        #binary (report positive-negative classifcation instead)
-                        #scale (report single -4 to +4 classifcation instead)
-
-
-    path_to_tweet_score_file = sys.argv[4]
-    #path_to_tweet_score_file = 'results/neutral/sts_gold_neutral0_out.txt'
-
-    path_to_store_labelled_tweets = sys.argv[5]
-    #path_to_store_labelled_tweets = 'results/neutral/sts_gold_neutral_senti_polarity.txt'
 
 
     ss = SentiStrength()

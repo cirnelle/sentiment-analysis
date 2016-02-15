@@ -1,10 +1,28 @@
 __author__ = 'yi-linghwong'
 
-list1 = ['1','0','1','0','1','0']
+import os
+import sys
 
-list2 = ['1','1','0','0','1','0']
+
+sys.path.append('/Users/yi-linghwong/GitHub/sentiment-analysis/utilities/')
+from compare_performance import ComparePerformance
+
+sys.path.append('/Users/yi-linghwong/GitHub/sentiment-analysis/_BLiu/')
+from bliu import BLiu
 
 
-not_equal = [(i,j) for i,j in zip(list1,list2) if i!=j]
+class Test():
 
-print (not_equal)
+    def test(self):
+        cp = ComparePerformance()
+        cp.calculate_performance()
+
+    def bliu(self):
+        os.chdir('/Users/yi-linghwong/GitHub/sentiment-analysis/_BLiu/')
+        bl = BLiu()
+        bl.combine_dicts()
+
+
+t = Test()
+t.test()
+t.bliu()
