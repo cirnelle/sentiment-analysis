@@ -88,7 +88,7 @@ class SentiStrength():
                 tweet_pol.append('neg')
 
             elif new_list[0] == '0':
-                tweet_pol.append('neg')
+                tweet_pol.append('neutral')
 
             else:
                 print ("error")
@@ -136,6 +136,6 @@ if __name__ == "__main__":
     ss = SentiStrength()
 
     ss.run_sentistrength()
-    #ss.label_tweets_binary()
-    ss.label_tweets_trinary()
+    ss.label_tweets_binary()
+    #ss.label_tweets_trinary()
 
