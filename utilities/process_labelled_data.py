@@ -484,11 +484,11 @@ class ProcessLabelledTweets():
             if (len(spline)) > 1:
 
                 # in case there are tabs in the tweet as well, so need to join them into one tweet
-                joined = ' '.join(spline[3:])
+                joined = ' '.join(spline[5:])
 
-                new_list = [spline[2],joined]
+                new_list = [spline[4],joined]
 
-                if (new_list[0] == '"positive"' or new_list[0] == '"negative"'):
+                if (new_list[0] == 'positive' or new_list[0] == 'negative'):
 
                     if len(new_list) == 2:
                         raw_tweets.append(new_list[1])
@@ -527,17 +527,17 @@ class ProcessLabelledTweets():
             if (len(spline)) > 1:
 
                 # in case there are tabs in the tweet as well, so need to join them into one tweet
-                joined = ' '.join(spline[3:])
+                joined = ' '.join(spline[5:])
 
-                new_list = [spline[2],joined]
+                new_list = [spline[4],joined]
 
-                if new_list[0] == '"positive"':
+                if new_list[0] == 'positive':
 
                     tweet_sentiment.append('pos')
                     tweet_sentiment.append(new_list[1])
                     tweet_sentiment_list.append(tweet_sentiment)
 
-                elif new_list[0] == '"negative"':
+                elif new_list[0] == 'negative':
 
                     tweet_sentiment.append('neg')
                     tweet_sentiment.append(new_list[1])
@@ -584,9 +584,9 @@ path_to_labelled_tweet_file_stanford = '../../data_files/labelled_tweets/stanfor
 path_to_store_raw_tweets_stanford_noneutral = '../tweets/raw_tweets_stanford_noneutral.txt'
 path_to_store_labelled_tweets_stanford_noneutral = '../tweets/labelled_tweets_stanford_noneutral.txt'
 
-path_to_labelled_tweet_file_semeval = '../../data_files/labelled_tweets/SemEval/tweeti-b.tsv'
-path_to_store_raw_tweets_semeval = '../tweets/raw_tweets_semeval_3.txt'
-path_to_store_labelled_tweets_semeval = '../tweets/labelled_tweets_semeval_3.txt'
+path_to_labelled_tweet_file_semeval = '../../data_files/labelled_tweets/SemEval/tweeti-a.tsv'
+path_to_store_raw_tweets_semeval = '../tweets/raw_tweets_semeval_4.txt'
+path_to_store_labelled_tweets_semeval = '../tweets/labelled_tweets_semeval_4.txt'
 
 
 

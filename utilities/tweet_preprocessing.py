@@ -340,6 +340,7 @@ class TweetPreprocessing():
 
             tweet_list.append(final_tweet)
 
+        print (len(tweet_list))
 
         f = open(path_to_store_preprocessed_tweets, 'w')
 
