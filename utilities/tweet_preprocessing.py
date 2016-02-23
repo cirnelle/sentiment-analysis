@@ -269,7 +269,7 @@ class TweetPreprocessing():
         #####################
         # Need to remove punctuation because of slang lookup (and also ngram lookup)
         # e.g. 'ur' is replaced with 'you are' in slang dict, but if tweet contains 'i am ur, so i come'
-        # 'ur,' wil be a word, and won't match the key in dict
+        # 'ur,' will be a word, and won't match the key in dict
         # this step must only happen after replace_emoticons and expand_contractions!
         #####################
 
@@ -285,6 +285,66 @@ class TweetPreprocessing():
 
             #remove special characters
             tweet = re.sub("[^A-Za-z0-9]+",' ', l)
+
+            tweet_list.append(tweet)
+
+        return tweet_list
+
+    def replace_contraction_and_single_character(self):
+
+    ################
+    # replace the contractions that are right at the beginning of sentence or right before a punctuation
+    # they were not removed before due to the lack of spaces before/after them
+    # also remove single characters
+    ################
+
+        contractions_dict = {
+            ' isn ': ' is not ',
+            ' aren ': ' are not ',
+            ' wasn ': ' was not ',
+            ' weren ': ' were not ',
+            ' hasn ': ' has not ',
+            ' hadn ': ' had not ',
+            ' wouldn ': ' would not ',
+            ' didn ': ' did not ',
+            ' don ': ' do not ',
+            ' doesn ': ' does not ',
+            ' couldn ': ' could not ',
+            ' shouldn ': ' should not ',
+            ' mightn ': ' might not ',
+            ' mustn ': ' must not ',
+            ' shan ': ' shall not ',
+        }
+
+        tweet_list_c = []
+
+        list = self.remove_punctuation()
+
+        contractions_re = re.compile('(%s)' % '|'.join(contractions_dict.keys()), re.IGNORECASE)
+
+        def replace(match):
+
+            return contractions_dict[match.group(0).lower()]
+
+        print ("Removing additional contractions and single characters ...")
+
+        for l in list:
+            l = ' '+l+' '
+            l = contractions_re.sub(replace, l)
+            tweet_list_c.append(l)
+
+        tweet_list = []
+
+        for tl in tweet_list_c:
+            words = []
+
+            for w in tl.split():
+                #remove single characters
+                if (len(w.lower())>=2):
+                    words.append(w.lower())
+
+                    #join the list of words together into a string
+                    tweet = " ".join(words)
 
             tweet_list.append(tweet)
 
@@ -313,7 +373,7 @@ class TweetPreprocessing():
 
         # remember to make all lower case! emoticons must be processed before slangs.
 
-        list = self.remove_punctuation()
+        list = self.replace_contraction_and_single_character()
 
         tweet_list = []
 
