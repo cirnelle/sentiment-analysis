@@ -9,6 +9,45 @@ import html.entities as htmlentitydefs
 
 class TweetPreprocessing():
 
+    def extract_raw_tweet(self):
+
+    ##############
+    # use this function only if input file contains other columns (e.g. dates)
+    ##############
+
+        lines = open(path_to_raw_tweet_complete, 'r').readlines()
+
+        print ("Length of original tweet list is "+str(len(lines)))
+
+        raw_tweets = []
+
+        for line in lines[:1]:
+
+            spline = line.replace('\n','').split(',')
+
+            length = len(spline)
+
+
+        for line in lines[1:]:
+
+            spline = line.replace('\n','').split(',')
+
+            if len(spline) == length:
+
+                raw_tweets.append(spline[-1])
+
+            else:
+                print ("Length error")
+                print (spline)
+
+        print ("Length of tweet list is "+str(len(raw_tweets)))
+
+        f = open(path_to_raw_tweet,'w')
+
+        for rt in raw_tweets:
+            f.write(rt+'\n')
+
+        f.close()
 
 
     def remove_url_mention_hashtag(self):
@@ -420,17 +459,21 @@ path_to_emoticon_dictionary = '../emoticons/emo_dict.txt'
 path_to_slang_dictionary = '../slangs/SlangLookupTable.txt'
 
 
-path_to_raw_tweet = '../tweets/raw_tweets_semeval.txt'
+path_to_raw_tweet_complete = '../../TwitterML/tweets/events/mars_announcement/output_mars_and_water_stream_30092015.csv' # to be used for file that contains other info besides tweets (e.g. dates, etc)
+path_to_raw_tweet = '../tweets/ground_truth/raw/raw_tweets_marswater.txt'
 #path_to_raw_tweet = '../../data_files/labelled_tweets/SA_1.5milliontweets/raw_tweets_SA.txt'
 #path_to_raw_tweet = sys.argv[1]
 
-path_to_store_preprocessed_tweets = '../tweets/preprocessed_tweets_semeval.txt'
+path_to_store_preprocessed_tweets = '../tweets/ground_truth/preprocessed/preprocessed_tweets_marswater.txt'
 #path_to_store_preprocessed_tweets = '../../data_files/labelled_tweets/SA_1.5milliontweets/prepocessed_tweets_SA.txt'
 #path_to_store_preprocessed_tweets = sys.argv[2]
 
 if __name__ == "__main__":
 
     tp = TweetPreprocessing()
+
+    tp.extract_raw_tweet()
+
     #tp.remove_url_mention_hashtag()
     #tp.expand_contraction()
     #tp.replace_emoticon()
