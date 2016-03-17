@@ -353,9 +353,11 @@ pos,Check Out These Fascinating Facts about the Bajau Sea Gypsies! https://t.co/
 pos,Like #science? Check out this awesome interview and inspiration  especially for girls who love natural science. https://t.co/crpPNAjSLE
 pos,Using @Seesaw to show off science fair experiments. #science #ubd  https://t.co/pM74LrZq9v
 pos,Fascinating! Learn the science behind #IVF in this @TEDTalks: https://t.co/7uZTOUPAQ7 #infertility #science
+pos,We are so proud of our shining stars :)  #NASA #SpaceContest #NarayanaSchools https://t.co/KehrBpYe85
 pos,Yearlong spaceman plunges into pool: 'man that feels good' #news #tech #science https://t.co/Dkq1Z8jGxg https://t.co/WTCuNZUa8e
 pos,#FLOTUS Michelle Obama inspires #school kids  #teachers  #gardeners &amp; me. #schoolyard #garden #outdoor #science   https://t.co/kan6BmwyDE
 pos,so cool! #music #science #bertrandsmusic  https://t.co/XloJzxsthx
+pos,#NASA making progress on EVA-35 water leak incident ... - https://t.co/89aC38jDKs https://t.co/yad9OVPCXm https://t.co/pu2LNETXpu
 pos,Great Quotes About Science! https://t.co/F0lhCkHQTv #Science #Quotes https://t.co/c4b7jWSKiv
 pos,8 Stunning Science Videos for Igniting the Imagination https://t.co/TXKSfaaNaU via @glodigcit #science
 pos,Only #SCIENCE would have the gall  impudence  audacity  cockiness  &amp; nerve to #GEO_ENGINEER #GOD's perfect creation https://t.co/JdgEoNvNC9
@@ -422,7 +424,6 @@ pos,I’m a little confused. Is it pronounced ESA  like one word  or do you say 
 pos,What Does The Inside Of A Black Hole Look Like? https://t.co/KJm4U8a7I1  #space #science https://t.co/BmoiCiW3ve
 pos,Here's The Coolest Thing About @NASA 's Eclipse Video | https://t.co/JS4FjojviL #space #solar @DS_COVR @NASASunEarth https://t.co/XF8khCS6QI
 pos,Ooh! @PopChartLab made an awesome chart of cosmic exploration! Classroom deco #space #science #ozscied #STEMed https://t.co/quQbGq400z
-pos,Did you know each day on Pluto lasts for 6.4 Earth’s days?  Amazing Video: https://t.co/tdnLWsxgQh #Space #Pluto https://t.co/G5ZWL3tcpz
 pos,NASA backs 4 solar cell projects to aid deep space missions #solar #space https://t.co/tYfuowbwby
 pos,Our footprints in #Space have some nice curves. https://t.co/glz8GPIq9J
 pos,Salar by starlight 🌟 #milkyway #starlight #stars #galaxy #space #world #wanderlust #love #salar… https://t.co/E9NrerVKmL
@@ -459,7 +460,6 @@ pos,Happy #PiDay to you all!  Yay Science!
 pos,It's not just science reporters who need to evaluate research  learn to tell good studies from bad  https://t.co/U6hV8k3GVk
 pos,@HelloHealthyYou Hi Jenny. Enjoy your sensible comments on nutrition. I blog about bad science in food. Any help/feedback appreciated.
 pos,RT @Snowden: .@neiltyson Thanks for the welcome. And now we've got water on Mars! Do you think they check passports at the border? Asking f…
-pos,RT @norm: Glad to hear they've found water on Mars. Hope that the next find is beer.
 pos,Kochs Hope to Be First to Pollute Water on Mars http://t.co/fcB7FokMrY
 pos,Water on Mars: What Does It Really Mean? - http://t.co/PdDCEFkiiM (Thanks @astrolisa)
 pos,Found on Mars: Cool  Clear Water? http://t.co/omrQm2Q7EU http://t.co/woiU9GzH8I
@@ -624,8 +624,6 @@ neutral,There Is #Water On Mars  But What Does This Mean For Life? http://t.co/x
 neutral,There is water on Mars http://t.co/Zt9n0sZMpN
 neutral,Nasa Finds Liquid Water On Mars http://t.co/haLrtSbijh
 neutral,RT @NASA: We now know water flows on Mars. Did you know we're working to send humans: http://t.co/ptSYFvcuu3 #MarsAnnouncement http://t.co/…
-neutral,RT @NASA: This image shows dark streaks from flow of briny liquid water on Mars: http://t.co/lp6Der5qbe #MarsAnnouncement http://t.co/4D3is…
-neutral,RT @CommitStrip: Why the water on Mars is salty.   http://t.co/I07IeUU7Q2 http://t.co/xl5cEG1fsv
 neutral,What Water on Mars Means for the Future of Space Exploration http://t.co/1IEPazrfIn
 neutral,RT @billboard: The guy who discovered water on Mars is also a heavy-metal guitarist http://t.co/FkGaZgbTSB
 neutral,Mars has flowing water which could sustain life according to Nasa http://t.co/T4EzH5qJlf
@@ -898,6 +896,9 @@ neutral,Are there clouds on #Pluto? Leaked photos reignite push to reinstate 'pl
 neutral,#Pluto has clouds? https://t.co/nKGW4HGqmD an "active cycle" raises the possibility of being reinstated as a planet https://t.co/5ekGVzsXvK
 neutral,Floating Hills on Pluto's Sputnik Planum (Heart of #Pluto)  #NASA https://t.co/Ajg5yrAHcN https://t.co/LKsL09bW5J
 neutral,Why is everyone talking about #Pluto? https://t.co/OmhM9e3NGG
+neutral,Self-directed #robot can identify objects #news #tech #science https://t.co/Tl3gar9NJS https://t.co/I50nw1hb0h
+neutral,Scott Kelly grew two inches in space – NASA looks for other changes - Sacramento Bee #science
+
 
 
 

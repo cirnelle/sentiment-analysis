@@ -3,26 +3,28 @@ __author__ = 'yi-linghwong'
 import os
 import sys
 
+lines = open('../tweets/ground_truth/labelled_ALL.txt')
 
-sys.path.append('/Users/yi-linghwong/GitHub/sentiment-analysis/utilities/')
-from compare_performance import ComparePerformance
+tweets = []
 
-sys.path.append('/Users/yi-linghwong/GitHub/sentiment-analysis/_BLiu/')
-from bliu import BLiu
+for line in lines:
+    spline = line.replace('\n','').split(',')
 
+    if len(spline) == 2:
+        tweets.append(spline[1])
 
-class Test():
+    else:
+        pass
 
-    def test(self):
-        cp = ComparePerformance()
-        cp.calculate_performance()
+print (len(tweets))
 
-    def bliu(self):
-        os.chdir('/Users/yi-linghwong/GitHub/sentiment-analysis/_BLiu/')
-        bl = BLiu()
-        bl.combine_dicts()
+no_dup = []
 
+for t in tweets:
+    if t not in no_dup:
+        no_dup.append(t)
 
-t = Test()
-t.test()
-t.bliu()
+    else:
+        print (t)
+
+print (len(no_dup))
