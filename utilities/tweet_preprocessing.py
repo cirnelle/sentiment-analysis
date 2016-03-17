@@ -459,12 +459,12 @@ path_to_emoticon_dictionary = '../emoticons/emo_dict.txt'
 path_to_slang_dictionary = '../slangs/SlangLookupTable.txt'
 
 
-path_to_raw_tweet_complete = '../../TwitterML/tweets/events/mars_announcement/output_mars_and_water_stream_30092015.csv' # to be used for file that contains other info besides tweets (e.g. dates, etc)
-path_to_raw_tweet = '../tweets/ground_truth/raw/raw_tweets_marswater.txt'
+path_to_raw_tweet_complete = '../../TwitterML/tweets/hashtags/raw_#pluto.csv' # to be used for file that contains other info besides tweets (e.g. dates, etc)
+path_to_raw_tweet = '../tweets/ground_truth/raw/raw_tweets_#pluto.txt'
 #path_to_raw_tweet = '../../data_files/labelled_tweets/SA_1.5milliontweets/raw_tweets_SA.txt'
 #path_to_raw_tweet = sys.argv[1]
 
-path_to_store_preprocessed_tweets = '../tweets/ground_truth/preprocessed/preprocessed_tweets_marswater.txt'
+path_to_store_preprocessed_tweets = '../tweets/ground_truth/preprocessed/preprocessed_tweets_#pluto.txt'
 #path_to_store_preprocessed_tweets = '../../data_files/labelled_tweets/SA_1.5milliontweets/prepocessed_tweets_SA.txt'
 #path_to_store_preprocessed_tweets = sys.argv[2]
 

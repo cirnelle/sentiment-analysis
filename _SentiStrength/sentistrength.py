@@ -110,7 +110,7 @@ class SentiStrength():
 ##############
 
 #path_to_tweet_file = sys.argv[1]
-path_to_tweet_file = '../tweets/ground_truth/preprocessed/preprocessed_tweets_marswater.txt'
+path_to_tweet_file = '../tweets/ground_truth/preprocessed/preprocessed_tweets_#pluto.txt'
 
 #path_to_output_folder = sys.argv[2]
 path_to_output_folder = '../tweets/ground_truth/ss_results/'
@@ -123,10 +123,10 @@ option = 'trinary'  #trinary (report positive-negative-neutral classifcation ins
 
 
 #path_to_tweet_score_file = sys.argv[4]
-path_to_tweet_score_file = '../tweets/ground_truth/ss_results/preprocessed_tweets_marswater0_out.txt'
+path_to_tweet_score_file = '../tweets/ground_truth/ss_results/preprocessed_tweets_#pluto0_out.txt'
 
 #path_to_store_labelled_tweets = sys.argv[5]
-path_to_store_labelled_tweets = '../tweets/ground_truth/labelled/labelled_tweets_marswater.txt'
+path_to_store_labelled_tweets = '../tweets/ground_truth/labelled/labelled_tweets_#pluto.txt'
 
 
 

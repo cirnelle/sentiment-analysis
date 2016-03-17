@@ -4,8 +4,8 @@ import os
 import sys
 
 
-lines = open('../tweets/ground_truth/raw/raw_tweets_marswater.txt','r')
-lines2 = open('../tweets/ground_truth/labelled/labelled_tweets_marswater.txt','r')
+lines = open('../tweets/ground_truth/raw/raw_tweets_#pluto.txt','r')
+lines2 = open('../tweets/ground_truth/labelled/labelled_tweets_#pluto.txt','r')
 
 labelled = []
 raw = []
@@ -53,7 +53,7 @@ else:
 
 # write non neutrals to file
 
-f = open('../tweets/ground_truth/labelled_ground_truth_marswater.csv','w')
+f = open('../tweets/ground_truth/labelled_ground_truth_#pluto.csv','w')
 
 for nn in non_neutrals:
     f.write(','.join(nn)+'\n')
@@ -62,7 +62,7 @@ f.close()
 
 # write neutrals to file
 
-f = open('../tweets/ground_truth/neutral/neutral_ground_truth_marswater.csv','w')
+f = open('../tweets/ground_truth/neutral/neutral_ground_truth_#pluto.csv','w')
 
 for n in neutrals:
     f.write(','.join(n)+'\n')
