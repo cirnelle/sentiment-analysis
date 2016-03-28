@@ -109,24 +109,24 @@ class SentiStrength():
 # variables
 ##############
 
-#path_to_tweet_file = sys.argv[1]
-path_to_tweet_file = '../tweets/ground_truth/preprocessed/preprocessed_tweets_#pluto.txt'
+path_to_tweet_file = sys.argv[1]
+#path_to_tweet_file = '../tweets/ground_truth/preprocessed/preprocessed_tweets_#pluto.txt'
 
-#path_to_output_folder = sys.argv[2]
-path_to_output_folder = '../tweets/ground_truth/ss_results/'
+path_to_output_folder = sys.argv[2]
+#path_to_output_folder = '../tweets/ground_truth/ss_results/'
 
 
-#option = sys.argv[3]
-option = 'trinary'  #trinary (report positive-negative-neutral classifcation instead)
+option = sys.argv[3]
+#option = 'trinary'  #trinary (report positive-negative-neutral classifcation instead)
                     #binary (report positive-negative classifcation instead)
                     #scale (report single -4 to +4 classifcation instead)
 
 
-#path_to_tweet_score_file = sys.argv[4]
-path_to_tweet_score_file = '../tweets/ground_truth/ss_results/preprocessed_tweets_#pluto0_out.txt'
+path_to_tweet_score_file = sys.argv[4]
+#path_to_tweet_score_file = '../tweets/ground_truth/ss_results/preprocessed_tweets_#pluto0_out.txt'
 
-#path_to_store_labelled_tweets = sys.argv[5]
-path_to_store_labelled_tweets = '../tweets/ground_truth/labelled/labelled_tweets_#pluto.txt'
+path_to_store_labelled_tweets = sys.argv[5]
+#path_to_store_labelled_tweets = '../tweets/ground_truth/labelled/labelled_tweets_#pluto.txt'
 
 
 
